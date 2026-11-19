@@ -16,7 +16,7 @@ There is a desktop app for Windows and Linux (Electron) and a browser version.
 ![Offline](https://img.shields.io/badge/runs-offline-2e9e5b)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow)
 
-**Website & live demo:** https://muelgerhbf.github.io/todo4me/
+**Website & live demo:** https://miracuelger.github.io/todo4me/
 
 ![Todo4Me dashboard](docs/screenshots/dashboard-light.png)
 
