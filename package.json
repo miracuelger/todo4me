@@ -7,7 +7,7 @@
     "name": "Todo4Me",
     "email": "muelgerhbf@users.noreply.github.com"
   },
-  "homepage": "https://github.com/muelgerhbf/todo4me",
+  "homepage": "https://github.com/miracuelger/todo4me",
   "license": "MIT",
   "private": true,
   "main": "electron/main.js",
@@ -47,7 +47,7 @@
     "publish": [
       {
         "provider": "github",
-        "owner": "muelgerhbf",
+        "owner": "miracuelger",
         "repo": "todo4me",
         "releaseType": "draft",
         "tagNamePrefix": "v"

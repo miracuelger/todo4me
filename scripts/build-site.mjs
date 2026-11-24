@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Builds the deployable website (GitHub Pages: https://muelgerhbf.github.io/todo4me/).
+// Builds the deployable website (GitHub Pages: https://miracuelger.github.io/todo4me/).
 //   node scripts/build-site.mjs [--out <dir>]      (default: dist/site)
 //
 // Output layout (all URLs relative, so it works under the sub-path /todo4me/):

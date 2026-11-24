@@ -26,7 +26,7 @@ Since 3.0 Todo4Me has a calm, typographic look called **Graphite**: graphite sur
 
 ### Windows
 
-1. On the **[latest release](https://github.com/muelgerhbf/todo4me/releases/latest)** page (currently [3.0.0](https://github.com/muelgerhbf/todo4me/releases/tag/v3.0.0)), download one of these files under *Assets*:
+1. On the **[latest release](https://github.com/miracuelger/todo4me/releases/latest)** page (currently [3.0.0](https://github.com/miracuelger/todo4me/releases/tag/v3.0.0)), download one of these files under *Assets*:
    - **`Todo4Me-Setup-3.0.0.exe`**: the installer (recommended). Double-click it and follow the steps. No admin rights needed; it creates a desktop shortcut and a Start menu entry. The installed version **updates itself automatically**.
    - **`Todo4Me-3.0.0-portable.exe`**: runs without installation, e.g. from a USB stick. It does **not** update itself.
 2. **Windows SmartScreen:** The files are not digitally signed (a code-signing certificate costs money). If you see "Windows protected your PC",
@@ -36,7 +36,7 @@ Since 3.0 Todo4Me has a calm, typographic look called **Graphite**: graphite sur
 
 ### Linux (x86_64)
 
-From the same [release page](https://github.com/muelgerhbf/todo4me/releases/latest), pick the file for your system:
+From the same [release page](https://github.com/miracuelger/todo4me/releases/latest), pick the file for your system:
 
 | Distribution | File | Install |
 |---|---|---|
@@ -603,7 +603,7 @@ Everything that enters a document (loading, pasting, import, undo) passes throug
 
 ## For developers
 
-Source code: <https://github.com/muelgerhbf/todo4me> (public). Ready-made installers are in the [Releases](https://github.com/muelgerhbf/todo4me/releases) of this repository.
+Source code: <https://github.com/miracuelger/todo4me> (public). Ready-made installers are in the [Releases](https://github.com/miracuelger/todo4me/releases) of this repository.
 Working guide for AI agents: [docs/AGENT-GUIDE.md](docs/AGENT-GUIDE.md). Changes per version: [CHANGELOG.md](CHANGELOG.md).
 
 Website: sources in `site/`, `node scripts/build-site.mjs` builds `dist/site/` (with a live demo of the browser app under `app/`), deployed by `.github/workflows/pages.yml`.
@@ -654,7 +654,7 @@ Reason: if the project is open in VS Code, VS Code (itself an Electron app) lock
 <details>
 <summary><strong>Publishing an update (release process)</strong></summary>
 
-Updates are published as *Releases* of this repository (`muelgerhbf/todo4me`), configured in `package.json → build.publish`.
+Updates are published as *Releases* of this repository (`miracuelger/todo4me`), configured in `package.json → build.publish`.
 The app checks the latest published release anonymously, so the repository must stay **public**. (Versions 2.0.0–2.1.1 still look in the former repository `todo4me-releases`; users of those versions install 2.1.2 once manually.)
 
 Releases are built by the GitHub Actions workflow `.github/workflows/release.yml` (Windows on a Windows runner, Linux on Ubuntu). It uses only the built-in `GITHUB_TOKEN`; no personal access token is needed.

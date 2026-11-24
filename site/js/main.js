@@ -1,7 +1,7 @@
 /* Todo4Me website: language, OS detection, release lookup, copy buttons, header. No dependencies. */
 (function () {
   'use strict';
-  var REPO = 'muelgerhbf/todo4me';
+  var REPO = 'miracuelger/todo4me';
   var RELEASES_LATEST = 'https://github.com/' + REPO + '/releases/latest';
   var API = 'https://api.github.com/repos/' + REPO + '/releases/latest';
   var CACHE_KEY = 'todo4me.site.release';
