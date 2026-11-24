@@ -1,32 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Todo4Me – tasks, weekly planner and notes. Offline.</title>
-  <meta name="description" content="Todo4Me is a free productivity app for Windows and Linux: tasks, weekly planner with calendar, notes, reminders and a document editor. Runs offline, no account, no cloud.">
-  <link rel="canonical" href="https://muelgerhbf.github.io/todo4me/">
-  <meta name="color-scheme" content="light dark">
-  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#0E0E12" media="(prefers-color-scheme: dark)">
+  <title>Todo4Me – tasks, weekly planner and documents. Offline.</title>
+  <meta name="description" content="Todo4Me is a free app for Windows and Linux: tasks, a weekly planner with calendar, notes, reminders and a document editor with pen. Runs offline, no account, no cloud.">
+  <link rel="canonical" href="https://miracuelger.github.io/todo4me/">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#0b0c0e">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Todo4Me">
-  <meta property="og:url" content="https://muelgerhbf.github.io/todo4me/">
-  <meta property="og:title" content="Todo4Me – tasks, weekly planner and notes. Offline.">
+  <meta property="og:url" content="https://miracuelger.github.io/todo4me/">
+  <meta property="og:title" content="Todo4Me – tasks, weekly planner and documents. Offline.">
   <meta property="og:description" content="Tasks, weekly planner, notes and a document editor. Runs offline on Windows and Linux, no account, no cloud.">
-  <meta property="og:image" content="https://muelgerhbf.github.io/todo4me/social-preview.png">
+  <meta property="og:image" content="https://miracuelger.github.io/todo4me/social-preview.png">
   <meta property="og:image:width" content="1280">
   <meta property="og:image:height" content="640">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Todo4Me – tasks, weekly planner and notes. Offline.">
+  <meta name="twitter:title" content="Todo4Me – tasks, weekly planner and documents. Offline.">
   <meta name="twitter:description" content="Tasks, weekly planner, notes and a document editor. Runs offline on Windows and Linux, no account, no cloud.">
-  <meta name="twitter:image" content="https://muelgerhbf.github.io/todo4me/social-preview.png">
+  <meta name="twitter:image" content="https://miracuelger.github.io/todo4me/social-preview.png">
 
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <link rel="preload" href="fonts/manrope-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/inter-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/site.css">
   <script src="js/early.js"></script>
 </head>
@@ -68,17 +67,17 @@
 
   <header class="site-header" id="top">
     <div class="wrap site-header__in">
-      <a class="brand" href="#top" aria-label="todo4me, back to top" data-i18n-aria-label="nav.home">
+      <a class="brand" href="#top" aria-label="Todo4Me, back to top" data-i18n-aria-label="nav.home">
         <svg class="brand__mark" aria-hidden="true"><use href="#mark"/></svg>
-        <span class="wordmark" aria-hidden="true">todo<span class="four">4</span>me</span>
+        <span class="wordmark" aria-hidden="true">Todo4Me</span>
       </a>
 
       <nav class="nav" id="nav" aria-label="Main navigation" data-i18n-aria-label="nav.label">
         <a href="#features" data-i18n="nav.features">Features</a>
         <a href="#privacy" data-i18n="nav.privacy">Privacy</a>
-        <a href="#screenshots" data-i18n="nav.screenshots">Screenshots</a>
-        <a href="#download" data-i18n="nav.download">Download</a>
-        <a class="nav__gh" href="https://github.com/muelgerhbf/todo4me" rel="noopener" data-i18n="nav.github">GitHub</a>
+        <a href="#new" data-i18n="nav.new">What’s new</a>
+        <a href="#faq" data-i18n="nav.faq">FAQ</a>
+        <a href="https://github.com/miracuelger/todo4me" rel="noopener" data-i18n="nav.github">GitHub</a>
       </nav>
 
       <div class="tools">
@@ -86,13 +85,7 @@
           <button type="button" data-lang="en" aria-pressed="true" lang="en" title="English">EN</button>
           <button type="button" data-lang="de" aria-pressed="false" lang="de" title="Deutsch">DE</button>
         </div>
-        <button type="button" class="icon-btn" id="theme-toggle" aria-label="Switch between light and dark theme" data-i18n-aria-label="theme.toggle">
-          <svg class="icon icon--sun" aria-hidden="true"><use href="#i-sun"/></svg>
-          <svg class="icon icon--moon" aria-hidden="true"><use href="#i-moon"/></svg>
-        </button>
-        <a class="icon-btn gh-link" href="https://github.com/muelgerhbf/todo4me" rel="noopener" aria-label="GitHub" title="GitHub">
-          <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>
-        </a>
+        <a class="btn btn--light btn--sm tools__dl" href="#download" data-i18n="nav.download">Download</a>
         <button type="button" class="icon-btn menu-btn" id="menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="nav" data-i18n-aria-label="nav.menu">
           <svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg>
         </button>
@@ -105,138 +98,155 @@
     <section class="hero" aria-labelledby="hero-title">
       <div class="wrap">
         <div class="hero__copy">
-          <p class="eyebrow" data-i18n="hero.eyebrow">Windows · Linux · Browser</p>
-          <h1 id="hero-title" data-i18n="hero.title">Plan your week. Keep your data.</h1>
-          <p class="lead" data-i18n="hero.sub">Todo4Me brings tasks, weekly planning, notes and a document editor into one calm dashboard. It runs offline on your computer, with no account and no cloud.</p>
+          <h1 id="hero-title" data-i18n-html="hero.title.html">Plan your week.<br>Keep your data.</h1>
+          <p class="lead" data-i18n="hero.sub">Tasks, a weekly planner, notes and documents in one quiet app. It runs offline on your computer, with no account and no cloud.</p>
           <div class="hero__cta">
-            <a class="btn btn--primary btn--lg" id="hero-cta" href="https://github.com/muelgerhbf/todo4me/releases/latest" data-os-cta>
-              <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>
-              <span id="hero-cta-label" data-i18n="hero.cta.other">See downloads</span>
+            <a class="btn btn--light btn--lg" id="hero-cta" href="https://github.com/miracuelger/todo4me/releases/latest" data-os-cta>
+              <span id="hero-cta-label" data-i18n="hero.cta.other">Download for free</span>
             </a>
-            <a class="btn btn--lg" href="app/" data-demo-link>
+            <a class="textlink" href="app/" data-demo-link>
               <span data-i18n="hero.cta.demo">Try it in your browser</span>
-              <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+              <svg class="icon" aria-hidden="true"><use href="#i-chevron-right"/></svg>
             </a>
           </div>
           <p class="hero__meta" id="hero-meta" data-i18n="hero.meta.noversion">Windows and Linux · free, MIT license</p>
-          <p class="hero__hint" data-i18n="hero.demoHint">The demo keeps its data in your browser only. Load sample data with one click.</p>
         </div>
-
-        <figure class="window hero__shot">
-          <div class="window__bar" aria-hidden="true"><i></i><i></i><i></i></div>
-          <img class="t-light" src="img/screenshots/dashboard-light.png" width="1425" height="1694" alt="Todo4Me dashboard in the light theme with today’s tasks, a progress ring and the daily top 3" data-i18n-alt="hero.shotAlt.light" fetchpriority="high">
-          <img class="t-dark" src="img/screenshots/dashboard-dark.png" width="1425" height="1694" alt="Todo4Me dashboard in the dark theme with today’s tasks, a progress ring and the daily top 3" data-i18n-alt="hero.shotAlt.dark" loading="lazy">
-        </figure>
+      </div>
+      <div class="stage" aria-hidden="false">
+        <div class="wrap stage__in">
+          <div class="tilt">
+            <figure class="frame">
+              <img src="img/screenshots/hero-dashboard.png" width="1440" height="900" alt="The Todo4Me dashboard in the dark theme: the sidebar, today’s tasks and the week at a glance" data-i18n-alt="hero.shotAlt" fetchpriority="high">
+            </figure>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- Features -->
-    <section class="section" id="features" aria-labelledby="features-title">
-      <div class="wrap">
-        <header class="section__head">
-          <h2 id="features-title" data-i18n="features.title">Everything you need to run your week</h2>
-          <p data-i18n="features.sub">One app for the things you do every day. Nothing more, nothing hidden.</p>
-        </header>
-        <ul class="grid grid--3 features">
-          <li class="card"><svg class="icon icon--lg" aria-hidden="true"><use href="#i-list"/></svg><h3 data-i18n="f.tasks.t">Tasks that fit your life</h3><p data-i18n="f.tasks.d">Priorities from Critical to Low, due dates with optional time, subtasks, tags and categories. Repeat daily, on weekdays or every few weeks. The quick-add line sets priority, category and date in one go.</p></li>
-          <li class="card"><svg class="icon icon--lg" aria-hidden="true"><use href="#i-week"/></svg><h3 data-i18n="f.planner.t">Weekly planner and calendar</h3><p data-i18n="f.planner.d">Drag tasks between days, or switch to an hourly grid and plan with time blocks you can move, resize and create. Outlook and Google calendars can appear read-only in the desktop app.</p></li>
-          <li class="card"><svg class="icon icon--lg" aria-hidden="true"><use href="#i-note"/></svg><h3 data-i18n="f.notes.t">Weekly notes</h3><p data-i18n="f.notes.d">Keep thoughts and ideas by week, with titles, tags, pinning and search. Not everything has to be a task. The daily plan adds a main goal, a top 3 and a reflection.</p></li>
-          <li class="card"><svg class="icon icon--lg" aria-hidden="true"><use href="#i-bell"/></svg><h3 data-i18n="f.reminders.t">Reminders</h3><p data-i18n="f.reminders.d">Get reminded at the due time, or 5, 15 or 30 minutes, 1 hour or 1 day before. Snooze for 10 minutes. Notifications also appear while the desktop app waits in the tray.</p></li>
-          <li class="card"><svg class="icon icon--lg" aria-hidden="true"><use href="#i-doc"/></svg><h3 data-i18n="f.editor.t">Documents and knowledge workspace</h3><p data-i18n="f.editor.d">Write like in a word processor, then connect your thinking: [[wiki links]] with backlinks and a graph view, a version history with word-level compare, find and replace, focus mode, formulas and code. Import and export Word, Markdown and more, or save as PDF.</p></li>
-          <li class="card"><svg class="icon icon--lg" aria-hidden="true"><use href="#i-pen"/></svg><h3 data-i18n="f.ink.t">Pen and handwriting</h3><p data-i18n="f.ink.d">Draw and write by hand in your documents: a pen with pressure, a highlighter, an eraser, a lasso and shapes with optional recognition. Use handwriting canvases with grid and layers, or annotate over text and formulas. Works with mouse, touch and pen, exports to SVG, PNG and PDF, and stays fully offline.</p></li>
-          <li class="card"><svg class="icon icon--lg" aria-hidden="true"><use href="#i-target"/></svg><h3 data-i18n="f.focus.t">Focus mode</h3><p data-i18n="f.focus.d">Hide everything except one task and work with a Pomodoro timer. Choose your top 3 for today and keep the day in view.</p></li>
-          <li class="card"><svg class="icon icon--lg" aria-hidden="true"><use href="#i-chart"/></svg><h3 data-i18n="f.stats.t">Statistics</h3><p data-i18n="f.stats.d">See what you finished today, this week and this month, plus completion rate, streak, a weekly chart and an 8-week trend.</p></li>
-          <li class="card"><svg class="icon icon--lg" aria-hidden="true"><use href="#i-sparkle"/></svg><h3 data-i18n="f.themes.t">Designs and themes</h3><p data-i18n="f.themes.d">Seven designs from Classic to Tokio and Paper, light or dark, your own accent color, fonts, density and text size. Available in English, German, Turkish and Spanish.</p></li>
-          <li class="card"><svg class="icon icon--lg" aria-hidden="true"><use href="#i-monitor"/></svg><h3 data-i18n="f.platforms.t">Windows, Linux and browser</h3><p data-i18n="f.platforms.d">Desktop apps for Windows and Linux that can update themselves, with an optional tray icon and a global shortcut for quick capture. Or simply open it in your browser.</p></li>
-        </ul>
-      </div>
-    </section>
+    <!-- Main areas: alternating text / screenshot rows -->
+    <div class="rows" id="features">
+      <article class="wrap row" aria-labelledby="r-tasks">
+        <div class="row__text">
+          <p class="kicker" data-i18n="r.tasks.k">Today and tasks</p>
+          <h2 id="r-tasks" data-i18n="r.tasks.t">A calm list for today</h2>
+          <p class="row__d" data-i18n="r.tasks.d">Today shows what is left and what is late, and nothing else competes with it. The quick-add line sets priority, category and date in one go, so a task is one line of typing.</p>
+          <ul class="points">
+            <li data-i18n="r.tasks.p1">Priorities from Critical to Low, due dates with optional time</li>
+            <li data-i18n="r.tasks.p2">Subtasks, tags and categories</li>
+            <li data-i18n="r.tasks.p3">Repeat daily, on weekdays or every few weeks</li>
+            <li data-i18n="r.tasks.p4">Reminders at the due time or before, with snooze</li>
+          </ul>
+        </div>
+        <figure class="frame row__shot"><img loading="lazy" src="img/screenshots/tasks.png" width="1440" height="900" alt="The task list: one line per task with priority, due date, tags and category" data-i18n-alt="r.tasks.alt"></figure>
+      </article>
+
+      <article class="wrap row row--flip" aria-labelledby="r-plan">
+        <div class="row__text">
+          <p class="kicker" data-i18n="r.plan.k">Weekly planner</p>
+          <h2 id="r-plan" data-i18n="r.plan.t">Drag your week into shape</h2>
+          <p class="row__d" data-i18n="r.plan.d">Move tasks between days, or switch to an hourly grid and plan with time blocks you can move, resize and create. Outlook and Google calendars can appear read-only in the desktop app.</p>
+          <ul class="points">
+            <li data-i18n="r.plan.p1">Day columns or hourly calendar view</li>
+            <li data-i18n="r.plan.p2">Daily plan with a main goal, a top 3 and a reflection</li>
+            <li data-i18n="r.plan.p3">Focus mode with a Pomodoro timer</li>
+          </ul>
+        </div>
+        <figure class="frame row__shot"><img loading="lazy" src="img/screenshots/planner.png" width="1440" height="900" alt="The weekly planner in calendar view with an hourly grid and time blocks" data-i18n-alt="r.plan.alt"></figure>
+      </article>
+
+      <article class="wrap row" aria-labelledby="r-docs">
+        <div class="row__text">
+          <p class="kicker" data-i18n="r.docs.k">Documents and knowledge</p>
+          <h2 id="r-docs" data-i18n="r.docs.t">Write like in a word processor. Connect like in a wiki.</h2>
+          <p class="row__d" data-i18n="r.docs.d">Proper documents with headings, tables, images, formulas and code, linked with [[wiki links]]. Backlinks and a graph view show how your notes relate.</p>
+          <ul class="points">
+            <li data-i18n="r.docs.p1">Version history with word-level compare</li>
+            <li data-i18n="r.docs.p2">Find and replace, focus mode, formulas and code</li>
+            <li data-i18n="r.docs.p3">Import and export Word and Markdown, save as PDF</li>
+          </ul>
+        </div>
+        <figure class="frame row__shot"><img loading="lazy" src="img/screenshots/documents.png" width="1440" height="900" alt="The document editor with a formatted document, folders and a toolbar" data-i18n-alt="r.docs.alt"></figure>
+      </article>
+
+      <article class="wrap row row--flip" aria-labelledby="r-ink">
+        <div class="row__text">
+          <p class="kicker" data-i18n="r.ink.k">Pen and handwriting</p>
+          <h2 id="r-ink" data-i18n="r.ink.t">Draw in your documents</h2>
+          <p class="row__d" data-i18n="r.ink.d">A pen with pressure, a highlighter, an eraser, a lasso and shapes with optional recognition. Use handwriting canvases with grid and layers, or annotate over text and formulas. It works with mouse, touch and pen, and stays fully offline.</p>
+          <ul class="points">
+            <li data-i18n="r.ink.p1">Exports to SVG, PNG and PDF</li>
+            <li data-i18n="r.ink.p2">Strokes stay editable vector data</li>
+          </ul>
+        </div>
+        <figure class="frame row__shot"><img loading="lazy" src="img/screenshots/ink.png" width="1440" height="900" alt="A document with handwritten pen strokes, a highlighter and drawn shapes" data-i18n-alt="r.ink.alt"></figure>
+      </article>
+    </div>
 
     <!-- Privacy -->
-    <section class="section section--tint" id="privacy" aria-labelledby="privacy-title">
-      <div class="wrap">
-        <header class="section__head">
-          <h2 id="privacy-title" data-i18n="privacy.title">Your data stays yours</h2>
-          <p data-i18n="privacy.lead">Todo4Me runs offline on your computer. There is no account, no cloud and no tracking. It is open source under the MIT license, so you can check this yourself.</p>
-        </header>
-        <ul class="grid grid--3 privacy">
-          <li class="fact"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><div><h3 data-i18n="p.offline.t">Offline first</h3><p data-i18n="p.offline.d">Everything works without an internet connection.</p></div></li>
-          <li class="fact"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><div><h3 data-i18n="p.account.t">No account</h3><p data-i18n="p.account.d">Install it and start. No sign-up, no email address.</p></div></li>
-          <li class="fact"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><div><h3 data-i18n="p.cloud.t">No cloud, no tracking</h3><p data-i18n="p.cloud.d">Nothing is uploaded and no usage data is collected.</p></div></li>
-          <li class="fact"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><div><h3 data-i18n="p.storage.t">A folder on your computer</h3><p data-i18n-html="p.storage.d.html">Windows: <code>%APPDATA%\Todo4Me</code><br>Linux: <code>~/.config/Todo4Me</code><br>Updating, reinstalling and uninstalling do not delete it.</p></div></li>
-          <li class="fact"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><div><h3 data-i18n="p.backup.t">Backups you control</h3><p data-i18n="p.backup.d">A daily automatic backup of the last 14 days, plus JSON export and import whenever you like.</p></div></li>
-          <li class="fact"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><div><h3 data-i18n="p.network.t">Honest about the network</h3><p data-i18n="p.network.d">The desktop app goes online only to check for updates and, if you set them up, to load subscribed calendars.</p></div></li>
-        </ul>
-      </div>
+    <section class="wrap split" id="privacy" aria-labelledby="privacy-title">
+      <header class="split__head">
+        <p class="kicker" data-i18n="privacy.k">Privacy</p>
+        <h2 id="privacy-title" data-i18n="privacy.title">Your data stays yours</h2>
+        <p class="row__d" data-i18n="privacy.lead">Todo4Me runs offline on your computer. It is open source under the MIT license, so you can check this yourself.</p>
+      </header>
+      <dl class="defs">
+        <div><dt data-i18n="p.offline.t">Offline first</dt><dd data-i18n="p.offline.d">Everything works without an internet connection.</dd></div>
+        <div><dt data-i18n="p.account.t">No account</dt><dd data-i18n="p.account.d">Install it and start. No sign-up, no email address.</dd></div>
+        <div><dt data-i18n="p.cloud.t">No cloud, no tracking</dt><dd data-i18n="p.cloud.d">Nothing is uploaded and no usage data is collected.</dd></div>
+        <div><dt data-i18n="p.storage.t">A folder on your computer</dt><dd data-i18n-html="p.storage.d.html">Windows: <code>%APPDATA%\Todo4Me</code>, Linux: <code>~/.config/Todo4Me</code>. Updating, reinstalling and uninstalling do not delete it.</dd></div>
+        <div><dt data-i18n="p.backup.t">Backups you control</dt><dd data-i18n="p.backup.d">A daily automatic backup of the last 14 days, plus JSON export and import whenever you like.</dd></div>
+        <div><dt data-i18n="p.network.t">Honest about the network</dt><dd data-i18n="p.network.d">The desktop app goes online only to check for updates and, if you set them up, to load subscribed calendars.</dd></div>
+      </dl>
     </section>
 
-    <!-- Screenshots -->
-    <section class="section" id="screenshots" aria-labelledby="shots-title">
-      <div class="wrap">
-        <header class="section__head">
-          <h2 id="shots-title" data-i18n="shots.title">See it in action</h2>
-          <p data-i18n="shots.sub">Real screenshots from the app, taken with sample data. Click to enlarge.</p>
-        </header>
-        <ul class="gallery" id="gallery">
-          <li><button type="button" class="shot" data-cap="s.calendar" aria-label="Enlarge: Weekly planner, calendar view">
-            <img class="t-light" loading="lazy" src="img/screenshots/planner-calendar-light.png" width="1440" height="900" alt="Weekly planner in calendar view with hourly grid and time blocks, light theme" data-i18n-alt="s.calendar.alt.light">
-            <img class="t-dark" loading="lazy" src="img/screenshots/planner-calendar-dark.png" width="1440" height="900" alt="Weekly planner in calendar view with hourly grid and time blocks, dark theme" data-i18n-alt="s.calendar.alt.dark">
-            <span class="shot__cap" data-i18n="s.calendar">Weekly planner, calendar view</span></button></li>
-          <li><button type="button" class="shot" data-cap="s.editor" aria-label="Enlarge: Document editor">
-            <img class="t-light" loading="lazy" src="img/screenshots/editor-light.png" width="1440" height="900" alt="Document editor with a formatted document, light theme" data-i18n-alt="s.editor.alt.light">
-            <img class="t-dark" loading="lazy" src="img/screenshots/editor-dark.png" width="1440" height="900" alt="Document editor with a formatted document, dark theme" data-i18n-alt="s.editor.alt.dark">
-            <span class="shot__cap" data-i18n="s.editor">Document editor</span></button></li>
-          <li><button type="button" class="shot" data-cap="s.workspace" aria-label="Enlarge: Knowledge workspace">
-            <img loading="lazy" src="img/screenshots/editor-workspace-light.png" width="1680" height="1000" alt="Document with table of contents, checklist, callout and table, with folders on the left and a backlinks panel on the right" data-i18n-alt="s.workspace.alt">
-            <span class="shot__cap" data-i18n="s.workspace">Knowledge workspace</span></button></li>
-          <li><button type="button" class="shot" data-cap="s.graph" aria-label="Enlarge: Graph view">
-            <img loading="lazy" src="img/screenshots/editor-graph.png" width="1680" height="1000" alt="Graph view showing documents as nodes connected by their wiki links" data-i18n-alt="s.graph.alt">
-            <span class="shot__cap" data-i18n="s.graph">Graph view</span></button></li>
-          <li><button type="button" class="shot" data-cap="s.ink" aria-label="Enlarge: Pen and handwriting">
-            <img loading="lazy" src="img/screenshots/editor-ink-light.png" width="1440" height="900" alt="Document with handwritten pen notes, a highlighter and a drawn shape over text" data-i18n-alt="s.ink.alt">
-            <span class="shot__cap" data-i18n="s.ink">Pen and handwriting</span></button></li>
-          <li><button type="button" class="shot" data-cap="s.tasks" aria-label="Enlarge: My tasks">
-            <img loading="lazy" src="img/screenshots/tasks-light.png" width="1425" height="1084" alt="Task list with priorities, categories, due dates and filters" data-i18n-alt="s.tasks.alt">
-            <span class="shot__cap" data-i18n="s.tasks">My tasks</span></button></li>
-          <li><button type="button" class="shot" data-cap="s.notes" aria-label="Enlarge: Weekly notes">
-            <img loading="lazy" src="img/screenshots/notes-light.png" width="1440" height="900" alt="Weekly notes grouped by week with tags and pinned notes" data-i18n-alt="s.notes.alt">
-            <span class="shot__cap" data-i18n="s.notes">Weekly notes</span></button></li>
-          <li><button type="button" class="shot" data-cap="s.days" aria-label="Enlarge: Weekly planner, day columns">
-            <img loading="lazy" src="img/screenshots/planner-days-light.png" width="1440" height="900" alt="Weekly planner with one column per day and tasks to drag between days" data-i18n-alt="s.days.alt">
-            <span class="shot__cap" data-i18n="s.days">Weekly planner, day columns</span></button></li>
-          <li><button type="button" class="shot" data-cap="s.stats" aria-label="Enlarge: Statistics">
-            <img loading="lazy" src="img/screenshots/statistics-light.png" width="1425" height="1049" alt="Statistics with completion rate, streak, weekly chart and trend" data-i18n-alt="s.stats.alt">
-            <span class="shot__cap" data-i18n="s.stats">Statistics</span></button></li>
-          <li><button type="button" class="shot" data-cap="s.focus" aria-label="Enlarge: Focus mode with Pomodoro timer">
-            <img loading="lazy" src="img/screenshots/focus-dark.png" width="1440" height="900" alt="Focus mode showing a single task and a Pomodoro timer, dark theme" data-i18n-alt="s.focus.alt">
-            <span class="shot__cap" data-i18n="s.focus">Focus mode with Pomodoro timer</span></button></li>
-          <li><button type="button" class="shot" data-cap="s.repeat" aria-label="Enlarge: Repeat settings">
-            <img loading="lazy" src="img/screenshots/repeat-editor-light.png" width="1100" height="900" alt="Task editor with a custom repeat rule, every 2 weeks on Monday and Wednesday" data-i18n-alt="s.repeat.alt">
-            <span class="shot__cap" data-i18n="s.repeat">Repeat settings</span></button></li>
-          <li><button type="button" class="shot" data-cap="s.tokio" aria-label="Enlarge: Design: Tokio">
-            <img loading="lazy" src="img/screenshots/designs/tokio-dark-dashboard.png" width="1440" height="900" alt="Dashboard in the neon dark Tokio design" data-i18n-alt="s.tokio.alt">
-            <span class="shot__cap" data-i18n="s.tokio">Design: Tokio</span></button></li>
-          <li><button type="button" class="shot" data-cap="s.paper" aria-label="Enlarge: Design: Paper">
-            <img loading="lazy" src="img/screenshots/designs/paper-light-planner.png" width="1440" height="900" alt="Weekly planner in the sepia Paper design with serif type" data-i18n-alt="s.paper.alt">
-            <span class="shot__cap" data-i18n="s.paper">Design: Paper</span></button></li>
-          <li><button type="button" class="shot" data-cap="s.dev" aria-label="Enlarge: Design: Development">
-            <img loading="lazy" src="img/screenshots/designs/development-dark-editor.png" width="1440" height="900" alt="Document editor in the Development design with monospace headings" data-i18n-alt="s.dev.alt">
-            <span class="shot__cap" data-i18n="s.dev">Design: Development</span></button></li>
-          <li><button type="button" class="shot shot--phone" data-cap="s.mobile" aria-label="Enlarge: On a phone">
-            <img loading="lazy" src="img/screenshots/mobile-menu.png" width="390" height="844" alt="Todo4Me navigation menu in the narrow mobile layout" data-i18n-alt="s.mobile.alt">
-            <span class="shot__cap" data-i18n="s.mobile">On a phone</span></button></li>
-        </ul>
-      </div>
+    <!-- Dense feature list -->
+    <section class="wrap block" id="all-features" aria-labelledby="features-title">
+      <header class="block__head">
+        <p class="kicker" data-i18n="features.k">Features</p>
+        <h2 id="features-title" data-i18n="features.title">Everything you need to run your week</h2>
+        <p class="row__d" data-i18n="features.sub">One app for the things you do every day.</p>
+      </header>
+      <dl class="dense">
+        <div><dt data-i18n="f.tasks.t">Tasks</dt><dd data-i18n="f.tasks.d">Priorities, due dates with optional time, subtasks, tags and categories.</dd></div>
+        <div><dt data-i18n="f.repeat.t">Repeats</dt><dd data-i18n="f.repeat.d">Daily, on weekdays or every few weeks, with your own rules.</dd></div>
+        <div><dt data-i18n="f.reminders.t">Reminders</dt><dd data-i18n="f.reminders.d">At the due time, or 5, 15 or 30 minutes, 1 hour or 1 day before. Snooze for 10 minutes.</dd></div>
+        <div><dt data-i18n="f.planner.t">Weekly planner</dt><dd data-i18n="f.planner.d">Day columns or an hourly grid with time blocks you can move and resize.</dd></div>
+        <div><dt data-i18n="f.calendar.t">Calendar subscriptions</dt><dd data-i18n="f.calendar.d">Outlook and Google calendars read-only through an ICS link, or import an .ics file.</dd></div>
+        <div><dt data-i18n="f.notes.t">Weekly notes</dt><dd data-i18n="f.notes.d">Thoughts by week, with titles, tags, pinning and search.</dd></div>
+        <div><dt data-i18n="f.focus.t">Focus mode</dt><dd data-i18n="f.focus.d">One task on screen and a Pomodoro timer. Pick your top 3 for the day.</dd></div>
+        <div><dt data-i18n="f.stats.t">Statistics</dt><dd data-i18n="f.stats.d">Completion rate, streak, a weekly chart and an 8-week trend.</dd></div>
+        <div><dt data-i18n="f.designs.t">Designs and accent</dt><dd data-i18n="f.designs.d">Seven designs, light or dark, your own accent color, density and text size.</dd></div>
+        <div><dt data-i18n="f.lang.t">Four languages</dt><dd data-i18n="f.lang.d">English, German, Turkish and Spanish, or follow your system.</dd></div>
+        <div><dt data-i18n="f.desktop.t">Desktop app</dt><dd data-i18n="f.desktop.d">Tray icon, global shortcut for quick capture and self-updating installs.</dd></div>
+        <div><dt data-i18n="f.data.t">Export and backup</dt><dd data-i18n="f.data.d">JSON export and import, and a daily automatic backup of the last 14 days.</dd></div>
+      </dl>
+    </section>
+
+    <!-- What's new -->
+    <section class="wrap split" id="new" aria-labelledby="new-title">
+      <header class="split__head">
+        <p class="kicker" data-i18n="new.k">What’s new</p>
+        <h2 id="new-title" data-i18n="new.title">What’s new in 3.0</h2>
+        <p class="row__d" data-i18n="new.lead">A new look for the whole app. Your tasks, notes and documents carry over as they are.</p>
+      </header>
+      <dl class="defs">
+        <div><dt data-i18n="new.1.t">Graphite</dt><dd data-i18n="new.1.d">A monochrome interface. Color appears only where it means something: priority, overdue, done.</dd></div>
+        <div><dt data-i18n="new.2.t">One line per task</dt><dd data-i18n="new.2.d">Due date, subtasks, duration and tags are plain text next to the title instead of a stack of pills.</dd></div>
+        <div><dt data-i18n="new.3.t">Set in Inter</dt><dd data-i18n="new.3.d">A sharper typeface with tabular figures for dates, times and counts.</dd></div>
+        <div><dt data-i18n="new.4.t">Lines, not cards</dt><dd data-i18n="new.4.d">Pages are built from hairlines, spacing and a clear page header with the actions on the right.</dd></div>
+        <div><dt data-i18n="new.5.t">Ink accent</dt><dd data-i18n="new.5.d">Primary buttons are near-black or near-white. You can still choose your own accent color.</dd></div>
+        <div><dt data-i18n="new.6.t">A quieter editor</dt><dd data-i18n="new.6.d">Flat toolbars and menus, so the page is what you see first.</dd></div>
+      </dl>
     </section>
 
     <!-- Download -->
-    <section class="section section--tint" id="download" aria-labelledby="dl-title">
-      <div class="wrap">
-        <header class="section__head">
-          <h2 id="dl-title" data-i18n="dl.title">Download Todo4Me</h2>
-          <p data-i18n="dl.sub">Free for Windows and Linux (x86_64). Choose your system.</p>
-          <p class="version" id="dl-version" data-i18n="dl.version.unknown">Latest version: see the release page</p>
-        </header>
+    <section class="wrap block" id="download" aria-labelledby="dl-title">
+      <header class="block__head">
+        <p class="kicker" data-i18n="dl.k">Download</p>
+        <h2 id="dl-title" data-i18n="dl.title">Download Todo4Me</h2>
+        <p class="row__d" data-i18n="dl.sub">Free for Windows and Linux (x86_64). Choose your system.</p>
+        <p class="version" id="dl-version" data-i18n="dl.version.unknown">Latest version: see the release page</p>
+      </header>
         <p class="notice" id="dl-other-os" hidden data-i18n="dl.otherOs">Todo4Me is available for Windows and Linux. On other systems, such as macOS, iOS or Android, use the browser version.</p>
 
         <div class="grid grid--2 downloads">
@@ -247,14 +257,14 @@
               <li class="dl-row">
                 <div class="dl-row__main">
                   <div class="dl-row__text"><strong data-i18n="dl.win.setup.t">Installer (recommended)</strong><span data-i18n="dl.win.setup.d">No admin rights needed. Creates a desktop shortcut and a Start menu entry, and updates itself.</span></div>
-                  <a class="btn btn--primary btn--sm" data-asset="setup" href="https://github.com/muelgerhbf/todo4me/releases/latest"><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg><span data-i18n="dl.download">Download</span><small class="size"></small></a>
+                  <a class="btn btn--primary btn--sm" data-asset="setup" href="https://github.com/miracuelger/todo4me/releases/latest"><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg><span data-i18n="dl.download">Download</span><small class="size"></small></a>
                 </div>
                 <p class="filename" data-filename="setup">Todo4Me-Setup-*.exe</p>
               </li>
               <li class="dl-row">
                 <div class="dl-row__main">
                   <div class="dl-row__text"><strong data-i18n="dl.win.portable.t">Portable</strong><span data-i18n="dl.win.portable.d">Runs without installation, for example from a USB stick. Does not update itself.</span></div>
-                  <a class="btn btn--sm" data-asset="portable" href="https://github.com/muelgerhbf/todo4me/releases/latest"><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg><span data-i18n="dl.download">Download</span><small class="size"></small></a>
+                  <a class="btn btn--sm" data-asset="portable" href="https://github.com/miracuelger/todo4me/releases/latest"><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg><span data-i18n="dl.download">Download</span><small class="size"></small></a>
                 </div>
                 <p class="filename" data-filename="portable">Todo4Me-*-portable.exe</p>
               </li>
@@ -270,28 +280,28 @@
               <li class="dl-row">
                 <div class="dl-row__main">
                   <div class="dl-row__text"><strong data-i18n="dl.linux.deb.t">Ubuntu, Debian, Mint</strong><span data-i18n="dl.linux.deb.d">.deb package, recommended on Ubuntu</span></div>
-                  <a class="btn btn--primary btn--sm" data-asset="deb" href="https://github.com/muelgerhbf/todo4me/releases/latest"><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg><span data-i18n="dl.download">Download</span><small class="size"></small></a>
+                  <a class="btn btn--primary btn--sm" data-asset="deb" href="https://github.com/miracuelger/todo4me/releases/latest"><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg><span data-i18n="dl.download">Download</span><small class="size"></small></a>
                 </div>
                 <div class="cmd"><code data-cmd="deb">sudo apt install ./Todo4Me-*-amd64.deb</code><button type="button" class="copy" data-copy><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span data-i18n="dl.copy">Copy</span></button></div>
               </li>
               <li class="dl-row">
                 <div class="dl-row__main">
                   <div class="dl-row__text"><strong data-i18n="dl.linux.rpm.t">Fedora, RHEL, openSUSE</strong><span data-i18n="dl.linux.rpm.d">.rpm package</span></div>
-                  <a class="btn btn--sm" data-asset="rpm" href="https://github.com/muelgerhbf/todo4me/releases/latest"><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg><span data-i18n="dl.download">Download</span><small class="size"></small></a>
+                  <a class="btn btn--sm" data-asset="rpm" href="https://github.com/miracuelger/todo4me/releases/latest"><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg><span data-i18n="dl.download">Download</span><small class="size"></small></a>
                 </div>
                 <div class="cmd"><code data-cmd="rpm">sudo dnf install ./Todo4Me-*-x86_64.rpm</code><button type="button" class="copy" data-copy><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span data-i18n="dl.copy">Copy</span></button></div>
               </li>
               <li class="dl-row">
                 <div class="dl-row__main">
                   <div class="dl-row__text"><strong data-i18n="dl.linux.appimage.t">Any distribution</strong><span data-i18n="dl.linux.appimage.d">AppImage, updates itself</span></div>
-                  <a class="btn btn--sm" data-asset="appimage" href="https://github.com/muelgerhbf/todo4me/releases/latest"><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg><span data-i18n="dl.download">Download</span><small class="size"></small></a>
+                  <a class="btn btn--sm" data-asset="appimage" href="https://github.com/miracuelger/todo4me/releases/latest"><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg><span data-i18n="dl.download">Download</span><small class="size"></small></a>
                 </div>
                 <div class="cmd"><code data-cmd="appimage">chmod +x Todo4Me-*.AppImage &amp;&amp; ./Todo4Me-*.AppImage</code><button type="button" class="copy" data-copy><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span data-i18n="dl.copy">Copy</span></button></div>
               </li>
               <li class="dl-row">
                 <div class="dl-row__main">
                   <div class="dl-row__text"><strong data-i18n="dl.linux.tar.t">Any distribution</strong><span data-i18n="dl.linux.tar.d">.tar.gz, no installation. Run todo4me from the extracted folder.</span></div>
-                  <a class="btn btn--sm" data-asset="tar" href="https://github.com/muelgerhbf/todo4me/releases/latest"><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg><span data-i18n="dl.download">Download</span><small class="size"></small></a>
+                  <a class="btn btn--sm" data-asset="tar" href="https://github.com/miracuelger/todo4me/releases/latest"><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg><span data-i18n="dl.download">Download</span><small class="size"></small></a>
                 </div>
                 <div class="cmd"><code data-cmd="tar">tar xzf Todo4Me-*-x64.tar.gz</code><button type="button" class="copy" data-copy><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span data-i18n="dl.copy">Copy</span></button></div>
               </li>
@@ -311,43 +321,48 @@
         </div>
 
         <p class="links">
-          <a href="https://github.com/muelgerhbf/todo4me/releases" rel="noopener" data-i18n="dl.links.all">All releases</a>
-          <a href="https://github.com/muelgerhbf/todo4me/blob/main/CHANGELOG.md" rel="noopener" data-i18n="dl.links.changelog">Changelog</a>
-          <a href="https://github.com/muelgerhbf/todo4me" rel="noopener" data-i18n="dl.links.source">Source on GitHub</a>
+          <a href="https://github.com/miracuelger/todo4me/releases" rel="noopener" data-i18n="dl.links.all">All releases</a>
+          <a href="https://github.com/miracuelger/todo4me/blob/main/CHANGELOG.md" rel="noopener" data-i18n="dl.links.changelog">Changelog</a>
+          <a href="https://github.com/miracuelger/todo4me" rel="noopener" data-i18n="dl.links.source">Source on GitHub</a>
         </p>
-      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="wrap split" id="faq" aria-labelledby="faq-title">
+      <header class="split__head">
+        <p class="kicker" data-i18n="faq.k">FAQ</p>
+        <h2 id="faq-title" data-i18n="faq.title">Questions</h2>
+      </header>
+      <dl class="defs defs--faq">
+        <div><dt data-i18n="faq.1.q">Is Todo4Me free?</dt><dd data-i18n="faq.1.a">Yes. It is open source under the MIT license, with no ads and no paid tier.</dd></div>
+        <div><dt data-i18n="faq.2.q">Do I need an account or an internet connection?</dt><dd data-i18n="faq.2.a">No account, and it works offline. The desktop app goes online only to check for updates and, if you set them up, to load subscribed calendars.</dd></div>
+        <div><dt data-i18n="faq.3.q">Where is my data?</dt><dd data-i18n-html="faq.3.a">In a folder on your computer: <code>%APPDATA%\Todo4Me</code> on Windows and <code>~/.config/Todo4Me</code> on Linux. The browser version keeps its data in that browser.</dd></div>
+        <div><dt data-i18n="faq.4.q">Can I use it on several devices?</dt><dd data-i18n="faq.4.a">Todo4Me has no sync service. You can move your data with JSON export and import.</dd></div>
+        <div><dt data-i18n="faq.5.q">Which systems are supported?</dt><dd data-i18n="faq.5.a">Windows and Linux (x86_64) as desktop apps. On other systems, such as macOS, iOS or Android, use the browser version.</dd></div>
+        <div><dt data-i18n="faq.6.q">Why does Windows warn me about the installer?</dt><dd data-i18n="faq.6.a">The files are not digitally signed. Choose More info, then Run anyway.</dd></div>
+        <div><dt data-i18n="faq.7.q">Does it update itself?</dt><dd data-i18n="faq.7.a">The Windows installer, the AppImage and the deb and rpm packages can update themselves. The portable version and the .tar.gz do not.</dd></div>
+      </dl>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="wrap site-footer__in">
       <div class="site-footer__brand">
-        <a class="brand" href="#top" aria-label="todo4me, back to top" data-i18n-aria-label="nav.home">
+        <a class="brand" href="#top" aria-label="Todo4Me, back to top" data-i18n-aria-label="nav.home">
           <svg class="brand__mark" aria-hidden="true"><use href="#mark"/></svg>
-          <span class="wordmark" aria-hidden="true">todo<span class="four">4</span>me</span>
+          <span class="wordmark" aria-hidden="true">Todo4Me</span>
         </a>
-        <p data-i18n="footer.tagline">Tasks, weekly planner and notes. Offline.</p>
+        <p data-i18n="footer.tagline">Tasks, weekly planner and documents. Offline.</p>
       </div>
       <ul class="site-footer__links">
-        <li><a href="https://github.com/muelgerhbf/todo4me" rel="noopener" data-i18n="footer.github">GitHub</a></li>
-        <li><a href="https://github.com/muelgerhbf/todo4me/releases" rel="noopener" data-i18n="footer.releases">Releases</a></li>
-        <li><a href="https://github.com/muelgerhbf/todo4me/blob/main/CHANGELOG.md" rel="noopener" data-i18n="footer.changelog">Changelog</a></li>
-        <li><a href="https://github.com/muelgerhbf/todo4me/blob/main/LICENSE" rel="noopener" data-i18n="footer.license">MIT license</a></li>
+        <li><a href="https://github.com/miracuelger/todo4me" rel="noopener" data-i18n="footer.github">GitHub</a></li>
+        <li><a href="https://github.com/miracuelger/todo4me/releases" rel="noopener" data-i18n="footer.releases">Releases</a></li>
+        <li><a href="https://github.com/miracuelger/todo4me/blob/main/CHANGELOG.md" rel="noopener" data-i18n="footer.changelog">Changelog</a></li>
+        <li><a href="https://github.com/miracuelger/todo4me/blob/main/LICENSE" rel="noopener" data-i18n="footer.license">MIT license</a></li>
       </ul>
-      <p class="site-footer__fine"><span data-i18n="footer.copy">© todo4me</span> · <span data-i18n="footer.font">Set in Manrope (SIL Open Font License)</span></p>
+      <p class="site-footer__fine"><span data-i18n="footer.copy">© Todo4Me</span> · <span data-i18n="footer.font">Set in Inter (SIL Open Font License)</span></p>
     </div>
   </footer>
-
-  <!-- Screenshot viewer -->
-  <dialog class="lightbox" id="lightbox" aria-label="Screenshot viewer" data-i18n-aria-label="lb.label">
-    <figure>
-      <img id="lb-img" alt="" src="">
-      <figcaption id="lb-cap"></figcaption>
-    </figure>
-    <button type="button" class="lightbox__btn lightbox__close" id="lb-close" aria-label="Close" data-i18n-aria-label="lb.close"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></button>
-    <button type="button" class="lightbox__btn lightbox__prev" id="lb-prev" aria-label="Previous screenshot" data-i18n-aria-label="lb.prev"><svg class="icon" aria-hidden="true"><use href="#i-chevron-left"/></svg></button>
-    <button type="button" class="lightbox__btn lightbox__next" id="lb-next" aria-label="Next screenshot" data-i18n-aria-label="lb.next"><svg class="icon" aria-hidden="true"><use href="#i-chevron-right"/></svg></button>
-  </dialog>
 
   <script src="js/i18n.js"></script>
   <script src="js/main.js"></script>

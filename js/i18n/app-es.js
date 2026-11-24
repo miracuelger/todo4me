@@ -1083,7 +1083,7 @@ T4.i18n.add('es', {
   'set.scClose': 'Cerrar el cuadro / salir del modo concentración',
   'set.syntax': 'Sintaxis de añadido rápido: <code>!1</code>–<code>!4</code> prioridad (crítica → baja), <code>#trabajo</code> categoría (o etiqueta si ninguna categoría coincide), <code>@today</code>, <code>@tomorrow</code>, <code>@fri</code>, <code>@2026-12-24</code> fecha límite.',
   // Design gallery taglines (js/themes.js)
-  'design.classic.tagline': 'El aspecto original de Todo4Me.',
+  'design.classic.tagline': 'Grafito: sereno, preciso y tipográfico. El aspecto de Todo4Me desde la 3.0.',
   'design.tokio.tagline': 'Ciudad de neón de noche: índigo profundo, magenta intenso y cian brillante.',
   'design.development.tagline': 'Un editor de código para tus tareas: grafito, colores de sintaxis y títulos monoespaciados.',
   'design.office.tagline': 'Nítido y profesional: blanco, gris frío y un azul claro.',

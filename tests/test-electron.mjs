@@ -123,9 +123,9 @@ export default async function (b) {
   await run(`
     const e = $('#update-btn');
     ok(e && !e.hidden && e.offsetParent !== null, 'update button visible once the update is downloaded');
-    ok(e.previousElementSibling && e.previousElementSibling.classList.contains('sidebar__brand') && e.nextElementSibling && e.nextElementSibling.classList.contains('sidebar__capture'), 'update button sits between the logo and Quick capture');
+    ok(e.previousElementSibling && e.previousElementSibling.classList.contains('sidebar__brand') && e.previousElementSibling.querySelector('.sidebar__capture'), 'update button sits right below the logo row (with the New task button)');
     ok(e.getAttribute('aria-label') === 'Update to 9.9.9 – restarts Todo4Me' && e.title === e.getAttribute('aria-label') && e.textContent.trim() === 'Update' && e.querySelector('svg'), 'update button: icon + "Update", tooltip/aria-label with version');
-    ok(parseFloat(getComputedStyle(e).borderTopLeftRadius) >= 15, 'update button is pill shaped');
+    ok(getComputedStyle(e).borderTopLeftRadius === getComputedStyle(document.documentElement).getPropertyValue('--radius').trim(), 'update button has the button radius of the design (3.0: no pills)');
     ok(!$$('.toast').some((t) => /Restart now/.test(t.textContent)), 'no "Restart now" toast any more');
     const probe = document.createElement('i'); probe.style.transition = 'none'; document.body.appendChild(probe); // no transition: otherwise getComputedStyle returns a mid-transition color
     const accentRgb = (hex) => { probe.style.color = hex; return getComputedStyle(probe).color; };

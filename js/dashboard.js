@@ -5,11 +5,11 @@ T4.dashboard = (function () {
   const { esc, icon } = U;
   const tt = (k, p) => T4.i18n.t(k, p);
 
-  function stat(label, value, iconName, tone, hint) {
+  /** One figure of the strip: number + small label (no icon, no tile). */
+  function stat(label, value, tone, hint) {
     return '<div class="stat stat--' + (tone || 'default') + '">' +
-      '<span class="stat__icon">' + icon(iconName) + '</span>' +
-      '<div><div class="stat__value">' + value + '</div><div class="stat__label">' + esc(label) + '</div>' +
-      (hint ? '<div class="stat__hint">' + esc(hint) + '</div>' : '') + '</div></div>';
+      '<div class="stat__value">' + value + '</div><div class="stat__label">' + esc(label) + '</div>' +
+      (hint ? '<div class="stat__hint">' + esc(hint) + '</div>' : '') + '</div>';
   }
 
   function summarySentence(open, overdue, important) {
@@ -44,12 +44,12 @@ T4.dashboard = (function () {
     }
     const doneCount = items.filter((t) => t.status === 'done').length;
     return '<section class="card card--top3" aria-labelledby="top3-h-' + date + '">' +
-      '<div class="card__head"><h2 class="card__title" id="top3-h-' + date + '">' + icon('star') + esc(tt(compactHeader ? 'db.top3' : 'db.top3Today')) +
+      '<div class="card__head"><h2 class="card__title" id="top3-h-' + date + '">' + esc(tt(compactHeader ? 'db.top3' : 'db.top3Today')) +
         (items.length ? ' <span class="count">' + doneCount + '/' + items.length + '</span>' : '') + '</h2>' +
         '<button type="button" class="btn btn--sm btn--ghost" data-action="pick-top3" data-date="' + date + '">' + esc(tt('db.choose')) + '</button></div>' +
       (!compactHeader ? (plan.goal
-        ? '<a class="goal" href="#/plan">' + icon('target') + '<span><span class="goal__label">' + esc(tt('db.mainGoal')) + '</span>' + esc(plan.goal) + '</span></a>'
-        : '<a class="goal goal--empty" href="#/plan">' + icon('target') + '<span>' + esc(tt('db.setGoal')) + '</span></a>') : '') +
+        ? '<a class="goal" href="#/plan"><span class="goal__label">' + esc(tt('db.mainGoal')) + '</span>' + esc(plan.goal) + '</a>'
+        : '<a class="goal goal--empty" href="#/plan">' + esc(tt('db.setGoal')) + '</a>') : '') +
       '<ol class="top3" role="list">' + slots + '</ol></section>';
   }
 
@@ -131,7 +131,7 @@ T4.dashboard = (function () {
         return '<a class="strip__day' + cls + '" href="#/planner" title="' + esc(tt('db.stripTip', { date: U.fmt(d, { weekday: 'long', month: 'short', day: 'numeric' }), done: dn, total: dt.length })) + '">' +
           '<span class="strip__wd">' + esc(U.fmt(d, { weekday: 'narrow' })) + '</span>' +
           '<span class="strip__num">' + Number(d.slice(8)) + '</span>' +
-          '<span class="strip__bar"><span style="height:' + (p * 100).toFixed(0) + '%"></span></span>' +
+          '<span class="strip__bar"><span style="width:' + (p * 100).toFixed(0) + '%"></span></span>' +
           '<span class="strip__count">' + (dt.length ? dn + '/' + dt.length : '–') + '</span></a>';
       }).join('');
 
@@ -139,28 +139,29 @@ T4.dashboard = (function () {
       const todayList = overdue.slice(0, 5).concat(openToday);
 
       return '<section class="hero">' +
-          '<div class="hero__text">' +
-            '<p class="hero__date">' + esc(U.fmt(today, { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })) + '</p>' +
-            '<h1 class="hero__title">' + U.greeting() + name + '</h1>' +
-            '<p class="hero__sub">' + summarySentence(openToday.length, overdue.length, importantToday) + '</p>' +
-          '</div>' +
-          '<div class="hero__ring">' + ui.progressRing(pct, 96, tt('db.todayRing', { pct: Math.round(pct * 100) })) + '<span class="hero__ring-cap">' + esc(tt('db.todayCap')) + '</span></div>' +
+          '<p class="hero__date">' + esc(U.fmt(today, { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })) + '</p>' +
+          '<h1 class="hero__title">' + U.greeting() + name + '</h1>' +
+          '<p class="hero__sub">' + summarySentence(openToday.length, overdue.length, importantToday) + '</p>' +
         '</section>' +
 
-        '<section class="card card--capture">' + tasks.quickAddForm({ inbox: true }, tt('db.quickPh'), 'qa-dash') + '</section>' +
+        '<section class="dash-capture">' + tasks.quickAddForm({ inbox: true }, tt('db.quickPh'), 'qa-dash') + '</section>' +
 
-        '<section class="stats" aria-label="' + esc(tt('db.glance')) + '">' +
-          stat(tt('db.statTasks'), todays.length, 'calendar', 'default') +
-          stat(tt('db.statDone'), doneToday.length, 'check', 'good') +
-          stat(tt('db.statRemaining'), openToday.length, 'clock', 'accent') +
-          stat(tt('db.statOverdue'), overdue.length, 'alert', overdue.length ? 'danger' : 'default') +
-        '</section>' +
+        '<div class="figs">' +
+          '<section class="stats" aria-label="' + esc(tt('db.glance')) + '">' +
+            stat(tt('db.statTasks'), todays.length, 'default') +
+            stat(tt('db.statDone'), doneToday.length, 'good') +
+            stat(tt('db.statRemaining'), openToday.length, 'accent') +
+            stat(tt('db.statOverdue'), overdue.length, overdue.length ? 'danger' : 'default') +
+          '</section>' +
+          '<div class="figs__line">' + ui.progressBar(pct, tt('db.todayRing', { pct: Math.round(pct * 100) })) +
+            '<span class="figs__cap">' + esc(tt('db.todayRing', { pct: Math.round(pct * 100) })) + '</span></div>' +
+        '</div>' +
 
         '<div class="dash-grid">' +
           '<div class="dash-col">' +
             top3Card(today) +
             '<section class="card" aria-labelledby="dash-today-h">' +
-              '<div class="card__head"><h2 class="card__title" id="dash-today-h">' + icon('sun') + esc(tt('db.todaysTasks')) + ' <span class="count">' + todayList.length + '</span></h2>' +
+              '<div class="card__head"><h2 class="card__title" id="dash-today-h">' + esc(tt('db.todaysTasks')) + ' <span class="count">' + todayList.length + '</span></h2>' +
                 '<a class="btn btn--sm btn--ghost" href="#/today">' + esc(tt('db.viewAll')) + ' ' + icon('arrow-right') + '</a></div>' +
               tasks.list(todayList, {}, ui.emptyState('sun', tt(todays.length ? 'tk.allDoneToday' : 'db.nothingToday'),
                 tt(todays.length ? 'db.allDoneText' : 'db.nothingTodayText'),
@@ -171,11 +172,11 @@ T4.dashboard = (function () {
           '</div>' +
           '<div class="dash-col">' +
             '<section class="card" aria-labelledby="dash-imp-h">' +
-              '<div class="card__head"><h2 class="card__title" id="dash-imp-h">' + icon('zap') + esc(tt('db.important')) + '</h2></div>' +
+              '<div class="card__head"><h2 class="card__title" id="dash-imp-h">' + esc(tt('db.important')) + '</h2></div>' +
               tasks.list(important, { compact: false }, '<p class="muted small">' + esc(tt('db.noImportant')) + '</p>') +
             '</section>' +
             '<section class="card" aria-labelledby="dash-week-h">' +
-              '<div class="card__head"><h2 class="card__title" id="dash-week-h">' + icon('week') + esc(tt('db.thisWeek')) + '</h2>' +
+              '<div class="card__head"><h2 class="card__title" id="dash-week-h">' + esc(tt('db.thisWeek')) + '</h2>' +
                 '<a class="btn btn--sm btn--ghost" href="#/planner">' + esc(tt('nav.short.planner')) + ' ' + icon('arrow-right') + '</a></div>' +
               '<div class="week-progress"><span>' + esc(tt('db.weekDone', { done: weekDone, total: weekTasks.length })) + '</span>' + ui.progressBar(weekTasks.length ? weekDone / weekTasks.length : 0, tt('db.weekProgress')) + '</div>' +
               '<div class="strip">' + strip + '</div>' +

@@ -3,7 +3,7 @@
      [data-design="id"][data-theme="light|dark"] { … }
    The engine (js/themes.js) sets data-design / data-theme / data-density on <html> and the inline tokens
    --accent, --font, --heading-font, --radius-sm/--radius/--radius-lg, --font-scale. 'classic' needs no block
-   (it is the default token set in styles.css).
+   (it is the default token set in styles.css: "Graphite", the 3.0 look; its accent is "ink").
 
    Tokens a design may set (defaults in styles.css :root / [data-theme="dark"]):
      Surfaces   --bg --surface --surface-2 --surface-3 --border --border-strong --shadow-sm --shadow --shadow-lg
@@ -12,12 +12,16 @@
      Status     --p-critical --p-high --p-medium --p-low --good --danger --warn
      Sidebar    --sidebar-bg --sidebar-text --sidebar-text-strong --sidebar-muted --sidebar-border --sidebar-hover
                 --sidebar-active --sidebar-active-text
-     Misc       --on-color (text on solid status colors) --focus-ring --backdrop --scrim --editor-desk
+     Misc       --pop-bg (menus/popovers; defaults to --surface) --on-color (text on solid status colors) --focus-ring --backdrop --scrim --editor-desk
                 --toast-bg --toast-fg --toast-success --toast-error --toast-info --toast-reminder
      Typography --mono (engine sets --font/--heading-font from the design definition)
      Always also set color-scheme: light|dark in the block.
    A design may add a few scoped rules after its blocks ("aura": glow, markers) — keep them to colors/shadows/decoration.
    ========================================================================== */
+
+/* Coloured designs: soft accent tints follow the design accent (Graphite itself stays neutral). Design blocks below may override. */
+[data-design]:not([data-design="classic"]) { --accent-soft: color-mix(in srgb, var(--accent) 14%, transparent); --accent-softer: color-mix(in srgb, var(--accent) 8%, transparent); }
+[data-design]:not([data-design="classic"])[data-theme="dark"] { --accent-soft: color-mix(in srgb, var(--accent) 22%, transparent); --accent-softer: color-mix(in srgb, var(--accent) 12%, transparent); }
 
 /* ==================== Tokio — neon night city (dark only) ==================== */
 [data-design="tokio"][data-theme="dark"] {
@@ -132,6 +136,7 @@
   color-scheme: light;
 }
 [data-design="aubergine"] .nav__link.is-active { font-weight: 650; }
+[data-design="aubergine"] .nav__link.is-active .nav__count, [data-design="aubergine"] .nav__link.is-active .icon { color: inherit; }
 [data-design="aubergine"] .sidebar kbd { background: rgba(255, 255, 255, .12); border-color: rgba(255, 255, 255, .22); color: var(--sidebar-text); }
 
 /* ==================== Fjord — Nordic calm (light + dark) ==================== */

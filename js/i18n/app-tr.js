@@ -1083,7 +1083,7 @@ T4.i18n.add('tr', {
   'set.scClose': 'İletişim kutusunu kapat / odak modundan çık',
   'set.syntax': 'Hızlı ekleme sözdizimi: <code>!1</code>–<code>!4</code> öncelik (kritik → düşük), <code>#iş</code> kategori (eşleşen kategori yoksa etiket), <code>@today</code>, <code>@tomorrow</code>, <code>@fri</code>, <code>@2026-12-24</code> son tarih.',
   // Design gallery taglines (js/themes.js)
-  'design.classic.tagline': 'Todo4Me’nin özgün görünümü.',
+  'design.classic.tagline': "Grafit: sakin, hassas ve tipografik. 3.0'dan beri Todo4Me görünümü.",
   'design.tokio.tagline': 'Neon gece şehri: koyu çivit, canlı macenta ve parlayan camgöbeği.',
   'design.development.tagline': 'Görevlerin için bir kod düzenleyici: grafit, sözdizimi renkleri ve eş aralıklı başlıklar.',
   'design.office.tagline': 'Net ve profesyonel: beyaz, soğuk gri ve berrak bir mavi.',

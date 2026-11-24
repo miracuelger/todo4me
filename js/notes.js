@@ -157,7 +157,7 @@ T4.notes = (function () {
       if (filters.tag && !tags.includes(filters.tag)) filters.tag = '';
       return '<header class="page-head"><div><h1 class="page-title">' + esc(tt('nav.notes')) + '</h1><p class="page-sub">' + esc(tt('nt.sub')) + '</p></div>' +
           '<div class="page-actions"><button type="button" class="btn btn--primary" data-action="new-note">' + icon('plus') + esc(tt('nt.newNote')) + '</button></div></header>' +
-        '<form class="card quick-note" id="quick-note" data-form="quick-note">' +
+        '<form class="quick-note" id="quick-note" data-form="quick-note">' +
           '<input type="text" name="title" maxlength="300" placeholder="' + esc(tt('nt.noteTitle')) + '" aria-label="' + esc(tt('nt.noteTitle')) + '" autocomplete="off">' +
           '<textarea name="body" rows="2" placeholder="' + esc(tt('nt.quickPh')) + '" aria-label="' + esc(tt('nt.noteText')) + '"></textarea>' +
           '<div class="quick-note__foot"><span class="muted small">' + esc(tt('nt.savedTo', { range: U.weekRangeLabel(store.weekStartOf(U.today())) })) + '</span><button type="submit" class="btn btn--primary btn--sm">' + esc(tt('nt.add')) + '</button></div>' +

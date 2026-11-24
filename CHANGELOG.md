@@ -4,6 +4,25 @@ All notable changes to Todo4Me (Windows and Linux desktop apps and web app) are 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versioning follows [Semantic Versioning](https://semver.org/).
 Release tags use the prefix `v` (versions up to 2.3.0 use the former prefix `windows-v`).
 
+## [3.0.0] - 2026-11-24
+
+### Changed
+- **Complete visual redesign, "Graphite".** The app, the document editor and the website have a new, calmer look; the art direction is documented in `docs/DESIGN.md`. Graphite palette in light and dark with an "ink" accent instead of the former violet; **Inter** (variable font, SIL OFL) is bundled and works offline.
+- **Tasks:** one-line task rows with plain-text meta instead of pills; content sheet layout with a page header bar; sections without cards.
+- **Sidebar:** search and compose icon buttons at the top. The violet *Quick capture* button is gone: `Q` still opens quick capture, `N` a new task, `/` the search.
+- **Dashboard:** a figure strip instead of tiles and the progress ring. **Focus mode:** one large timer. **Settings:** two-column groups. **Editor:** flat toolbar and panels, restyled pen bar.
+- **Designs:** the default design is now called **Graphite** (id unchanged); the other seven designs are kept and adapted to the new layout. Users who had the old default violet keep their data; it is simply shown as the design accent. The violet swatch is now `#6e56cf`.
+- **Reduced motion** now turns transitions off completely.
+- **Website** rewritten, dark first: Inter instead of Manrope, perspective hero screenshot, editorial sections, "What's new in 3.0" and an FAQ.
+- Page styles moved from `css/styles.css` into the new `css/pages.css`.
+- All README and website screenshots were retaken from the running app (sample data); new `editor-workspace-dark.png`.
+
+### Fixed
+- The calendar crashed when the window was resized before the first page was rendered.
+
+### Developer
+- New devDependency `@fontsource-variable/inter`; `scripts/vendor.js` copies the Inter files to `vendor/fonts/`.
+
 ## [2.9.0] - 2026-11-13
 
 ### Added

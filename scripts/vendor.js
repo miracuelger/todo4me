@@ -54,6 +54,11 @@ fonts.forEach(([name, files]) => {
   if (lic) copy(lic, path.join(OUT, 'fonts', name.toUpperCase() + '-LICENSE.txt'));
 });
 
+/* Inter (variable: weight 100-900 + optical size), the UI typeface since 3.0. Latin + Latin Extended (de, tr, es). */
+['latin-opsz-normal', 'latin-ext-opsz-normal', 'latin-opsz-italic', 'latin-ext-opsz-italic'].forEach((f) =>
+  copy(path.join(NM, '@fontsource-variable', 'inter', 'files', 'inter-' + f + '.woff2'), path.join(OUT, 'fonts', 'inter-' + f + '.woff2')));
+copy(path.join(NM, '@fontsource-variable', 'inter', 'LICENSE'), path.join(OUT, 'fonts', 'INTER-LICENSE.txt'));
+
 let total = 0, count = 0;
 (function walk(d) {
   fs.readdirSync(d, { withFileTypes: true }).forEach((e) => {

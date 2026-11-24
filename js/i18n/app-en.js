@@ -1083,7 +1083,7 @@ T4.i18n.add('en', {
   'set.scClose': 'Close dialog / exit focus mode',
   'set.syntax': 'Quick-add syntax: <code>!1</code>–<code>!4</code> priority (critical → low), <code>#work</code> category (or tag if no category matches), <code>@today</code>, <code>@tomorrow</code>, <code>@fri</code>, <code>@2026-12-24</code> due date.',
   // Design gallery taglines (js/themes.js)
-  'design.classic.tagline': 'The original Todo4Me look.',
+  'design.classic.tagline': 'Graphite: quiet, precise and typographic. The Todo4Me look since 3.0.',
   'design.tokio.tagline': 'Neon night city: deep indigo, hot magenta and glowing cyan.',
   'design.development.tagline': 'A code editor for your tasks: graphite, syntax colors and monospace headings.',
   'design.office.tagline': 'Crisp and businesslike: white, cool gray and a clear blue.',

@@ -274,7 +274,7 @@ T4.calendar = (function () {
     const el = document.querySelector('.cal__now');
     if (el) el.style.top = pct(minutesOf(Date.now())) + '%';
   }, 60 * 1000);
-  if (mq && mq.addEventListener) mq.addEventListener('change', () => { if (T4.app.route.name === 'planner' && isActive() && !drag) T4.app.render(); });
+  if (mq && mq.addEventListener) mq.addEventListener('change', () => { if (T4.app && T4.app.route && T4.app.route.name === 'planner' && isActive() && !drag) T4.app.render(); });
 
   /* ======================= Changing tasks ======================= */
   /** Apply a calendar change to a task (with Undo). patch: { dueDate, dueTime } or { estimate }. */

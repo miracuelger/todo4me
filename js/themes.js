@@ -27,10 +27,11 @@ T4.themes = (function () {
   };
   const RADII = {
     sharp: { sm: 2, md: 3, lg: 5 },
-    soft: { sm: 6, md: 10, lg: 14 },   // = today's look
-    round: { sm: 10, md: 16, lg: 22 },
+    soft: { sm: 4, md: 6, lg: 10 },    // Graphite (3.0)
+    round: { sm: 8, md: 12, lg: 18 },
   };
-  const DEFAULT_ACCENT = '#5b5bd6';
+  const DEFAULT_ACCENT = '#17181a';
+  const LEGACY_ACCENT = '#5b5bd6';     // the 2.x default colour: stored as a "custom" accent, now means "use the design accent" (no data rewrite)
 
   const designs = new Map();
   const HEX = /^#[0-9a-f]{6}$/i;
@@ -38,8 +39,8 @@ T4.themes = (function () {
 
   function normPreview(p, fallbackAccent) {
     const one = (x) => ({
-      bg: (x && x.bg) || '#f6f6f8', surface: (x && x.surface) || '#ffffff', sidebar: (x && x.sidebar) || (x && x.surface) || '#ffffff',
-      text: (x && x.text) || '#17171c', accent: (x && x.accent) || fallbackAccent,
+      bg: (x && x.bg) || '#f4f4f5', surface: (x && x.surface) || '#ffffff', sidebar: (x && x.sidebar) || (x && x.surface) || '#ffffff',
+      text: (x && x.text) || '#17181a', accent: (x && x.accent) || fallbackAccent,
     });
     if (p && (p.light || p.dark)) return { light: one(p.light || p.dark), dark: one(p.dark || p.light) };
     const o = one(p);
@@ -94,8 +95,16 @@ T4.themes = (function () {
   function resolveAccent(s) {
     s = s || {};
     const d = get(s.design);
-    if (s.accentSource === 'design') return d.accentFor(resolveMode(s));
-    return HEX.test(s.accent || '') ? s.accent : DEFAULT_ACCENT;
+    if (s.accentSource === 'design' || (s.accentSource === 'custom' && String(s.accent || '').toLowerCase() === LEGACY_ACCENT)) return d.accentFor(resolveMode(s));
+    return HEX.test(s.accent || '') ? s.accent : d.accentFor(resolveMode(s));
+  }
+  /* Text colour on a user-picked accent (black or white by contrast); null = the design's own --accent-fg applies. */
+  function accentFg(s) {
+    s = s || {};
+    if (s.accentSource === 'design' || !HEX.test(s.accent || '') || String(s.accent).toLowerCase() === LEGACY_ACCENT) return null;
+    const c = [1, 3, 5].map((i) => parseInt(s.accent.slice(i, i + 2), 16) / 255).map((v) => (v <= .03928 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4)));
+    const L = .2126 * c[0] + .7152 * c[1] + .0722 * c[2];
+    return L > .4 ? '#17181a' : '#ffffff';
   }
   /* Computed token values for settings (without touching the DOM) — used by apply() and tests. */
   function tokens(s) {
@@ -107,6 +116,7 @@ T4.themes = (function () {
     const scale = Math.min(125, Math.max(85, Math.round(+s.fontScale) || 100));
     return {
       '--accent': resolveAccent(s),
+      '--accent-fg': accentFg(s),
       '--font': fontStack(bodyFont),
       '--heading-font': fontStack(headFont),
       '--radius-sm': r.sm + 'px', '--radius': r.md + 'px', '--radius-lg': r.lg + 'px',
@@ -126,9 +136,9 @@ T4.themes = (function () {
   }
 
   register({
-    id: 'classic', name: 'Classic', tagline: 'The original Todo4Me look.', modes: ['light', 'dark'], accent: DEFAULT_ACCENT,
+    id: 'classic', name: 'Graphite', tagline: 'Quiet graphite, Inter and an ink accent.', modes: ['light', 'dark'], accent: { light: '#17181a', dark: '#eceef0' },
     font: 'inter', radius: 'soft',
-    preview: { light: { bg: '#f6f6f8', surface: '#ffffff', sidebar: '#ffffff', text: '#17171c', accent: DEFAULT_ACCENT }, dark: { bg: '#0e0f12', surface: '#16171b', sidebar: '#16171b', text: '#ececf0', accent: DEFAULT_ACCENT } },
+    preview: { light: { bg: '#f4f4f5', surface: '#ffffff', sidebar: '#f4f4f5', text: '#17181a', accent: '#17181a' }, dark: { bg: '#0b0c0e', surface: '#111214', sidebar: '#0b0c0e', text: '#eceef0', accent: '#eceef0' } },
   });
 
   /* The designs. Palettes live in css/themes.css. */
@@ -163,5 +173,5 @@ T4.themes = (function () {
     preview: { light: { bg: '#efe5d0', surface: '#f9f3e5', sidebar: '#e9dec6', text: '#33291d', accent: '#8f4a1f' }, dark: { bg: '#1b1610', surface: '#241e15', sidebar: '#15110c', text: '#e8dcc2', accent: '#d9a05b' } },
   });
 
-  return { FONTS, RADII, register, get, list, apply, resolveMode, resolveAccent, tokens };
+  return { FONTS, RADII, register, get, list, apply, resolveMode, resolveAccent, accentFg, tokens };
 })();
