@@ -11,7 +11,7 @@
 weekly notes, reminders, and a document and knowledge workspace (wiki links, version history, Word import/export, PDF export). Everything runs **offline on your computer**, with no account and no cloud.
 There is a desktop app for Windows and Linux (Electron) and a browser version.
 
-![Version](https://img.shields.io/badge/Version-2.9.0-5b5bd6)
+![Version](https://img.shields.io/badge/Version-3.0.0-2b2f36)
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux-0078d4)
 ![Offline](https://img.shields.io/badge/runs-offline-2e9e5b)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow)
@@ -20,13 +20,15 @@ There is a desktop app for Windows and Linux (Electron) and a browser version.
 
 ![Todo4Me dashboard](docs/screenshots/dashboard-light.png)
 
+Since 3.0 Todo4Me has a calm, typographic look called **Graphite**: graphite surfaces in light and dark, one ink accent, the Inter typeface (bundled, works offline), one-line task rows and no cards or badges where plain text does the job. The art direction is written down in [docs/DESIGN.md](docs/DESIGN.md).
+
 ## Download & install
 
 ### Windows
 
-1. On the **[latest release](https://github.com/muelgerhbf/todo4me/releases/latest)** page (currently [2.9.0](https://github.com/muelgerhbf/todo4me/releases/tag/v2.9.0)), download one of these files under *Assets*:
-   - **`Todo4Me-Setup-2.9.0.exe`**: the installer (recommended). Double-click it and follow the steps. No admin rights needed; it creates a desktop shortcut and a Start menu entry. The installed version **updates itself automatically**.
-   - **`Todo4Me-2.9.0-portable.exe`**: runs without installation, e.g. from a USB stick. It does **not** update itself.
+1. On the **[latest release](https://github.com/muelgerhbf/todo4me/releases/latest)** page (currently [3.0.0](https://github.com/muelgerhbf/todo4me/releases/tag/v3.0.0)), download one of these files under *Assets*:
+   - **`Todo4Me-Setup-3.0.0.exe`**: the installer (recommended). Double-click it and follow the steps. No admin rights needed; it creates a desktop shortcut and a Start menu entry. The installed version **updates itself automatically**.
+   - **`Todo4Me-3.0.0-portable.exe`**: runs without installation, e.g. from a USB stick. It does **not** update itself.
 2. **Windows SmartScreen:** The files are not digitally signed (a code-signing certificate costs money). If you see "Windows protected your PC",
    choose **More info → Run anyway**.
 3. **Your data** is stored on your computer in the folder `%APPDATA%\Todo4Me` (e.g. `C:\Users\<Name>\AppData\Roaming\Todo4Me`); the installed and portable versions share it.
@@ -38,10 +40,10 @@ From the same [release page](https://github.com/muelgerhbf/todo4me/releases/late
 
 | Distribution | File | Install |
 |---|---|---|
-| Ubuntu, Debian, Mint (recommended on Ubuntu) | `Todo4Me-2.9.0-amd64.deb` | `sudo apt install ./Todo4Me-2.9.0-amd64.deb` |
-| Fedora, RHEL, openSUSE | `Todo4Me-2.9.0-x86_64.rpm` | `sudo dnf install ./Todo4Me-2.9.0-x86_64.rpm` |
-| Any distribution, self-updating | `Todo4Me-2.9.0-x86_64.AppImage` | `chmod +x Todo4Me-2.9.0-x86_64.AppImage && ./Todo4Me-2.9.0-x86_64.AppImage` |
-| Any distribution, no installation | `Todo4Me-2.9.0-x64.tar.gz` | `tar xzf Todo4Me-2.9.0-x64.tar.gz`, then run `todo4me` from the extracted folder |
+| Ubuntu, Debian, Mint (recommended on Ubuntu) | `Todo4Me-3.0.0-amd64.deb` | `sudo apt install ./Todo4Me-3.0.0-amd64.deb` |
+| Fedora, RHEL, openSUSE | `Todo4Me-3.0.0-x86_64.rpm` | `sudo dnf install ./Todo4Me-3.0.0-x86_64.rpm` |
+| Any distribution, self-updating | `Todo4Me-3.0.0-x86_64.AppImage` | `chmod +x Todo4Me-3.0.0-x86_64.AppImage && ./Todo4Me-3.0.0-x86_64.AppImage` |
+| Any distribution, no installation | `Todo4Me-3.0.0-x64.tar.gz` | `tar xzf Todo4Me-3.0.0-x64.tar.gz`, then run `todo4me` from the extracted folder |
 
 - **AppImage needs FUSE 2.** On Ubuntu 22.04 and newer install it with `sudo apt install libfuse2t64` (older: `libfuse2`), or start the AppImage with `--appimage-extract-and-run`.
 - **Sandbox on Ubuntu 23.10+:** Ubuntu restricts unprivileged user namespaces with AppArmor. The deb and rpm packages install an AppArmor profile and keep Chromium's sandbox, which is why they are recommended there.
@@ -57,7 +59,7 @@ You can also use Todo4Me in the browser without installing anything (see [Using 
 ## Getting started
 
 1. **Try it with sample data (optional).** *Settings → Data & backup → Add sample data* fills the app with example tasks. Clean up later with *Reset all data*.
-2. **Create your first task.** In the dashboard or under *My Tasks*, type into the "Add a task…" field and press Enter, or press `N` for the detailed form. With the **quick-add syntax** you set priority, category and date right away:
+2. **Create your first task.** In the dashboard or under *My Tasks*, type into the "Add a task…" field and press Enter, or press `N` (or use the compose button next to the search icon at the top of the sidebar) for the detailed form. With the **quick-add syntax** you set priority, category and date right away:
    `Send invoice !2 #work @fri` (priority 2, category Work, due Friday). Add `every monday` and the task repeats. To drop in a thought without details, press `Q` (*Quick capture*) to put it in the **Inbox** and sort it later.
 
    ![My Tasks](docs/screenshots/tasks-light.png)
@@ -98,12 +100,12 @@ The "Add a task..." field shows an example of the quick-add syntax; the **`?`** 
 
 Everything about the look lives in *Settings → Appearance & customization* and applies instantly:
 
-- **7 designs**, each with its own character: **Classic** (the original), **Tokio** (neon night city), **Development** (code-editor dark, monospace headings), **Office** (crisp and businesslike), **Aubergine** (dark aubergine sidebar, warm workspace), **Fjord** (Nordic calm, light and dark) and **Paper** (sepia and serif, with a night-reading variant).
-- **Mode** Light / Dark / System (single-mode designs say so), **accent color** from the design, 8 presets or any color you pick.
+- **7 designs**, each with its own character: **Graphite** (the default since 3.0), **Tokio** (neon night city), **Development** (code-editor dark, monospace headings), **Office** (crisp and businesslike), **Aubergine** (dark aubergine sidebar, warm workspace), **Fjord** (Nordic calm, light and dark) and **Paper** (sepia and serif, with a night-reading variant).
+- **Mode** Light / Dark / System (single-mode designs say so), **accent color** from the design (Graphite: ink), 8 presets or any color you pick. If you chose the old violet before 3.0, your data is untouched; the color simply shows as the design accent.
 - **Font** (Inter, System, Serif, Monospace, Rounded), **corners** (sharp, soft, round), **density** (comfortable or compact) and **text size** (85–125 %).
 - **Sidebar:** hide views you don't use (e.g. *Daily Plan*) and change their order. Hidden views stay reachable by link and keyboard shortcut. Dashboard and Settings always stay.
 - **Language:** English, Deutsch, Türkçe, Español – or *Automatic* to follow your system. The desktop menu, tray and notifications switch too.
-- **Reset appearance** brings back Classic with one click (with Undo); your tasks and notes are not touched.
+- **Reset appearance** brings back Graphite with one click (with Undo); your tasks and notes are not touched.
 
 | Tokio | Paper |
 |---|---|
@@ -117,7 +119,7 @@ Everything about the look lives in *Settings → Appearance & customization* and
 
 ### Light and dark
 
-The theme switches between **Light**, **Dark** and **System** under *Settings → Appearance & customization → Mode* (Classic design shown).
+The theme switches between **Light**, **Dark** and **System** under *Settings → Appearance & customization → Mode* (Graphite design shown).
 
 | Light | Dark |
 |---|---|
@@ -147,7 +149,7 @@ The screenshots are taken from the running app with sample data.
 |---|---|
 | `N` | New task |
 | `Q` | Quick capture into the Inbox |
-| `/` | Focus the search field (My Tasks, Weekly Notes) |
+| `/` | Focus the search field (My Tasks, Weekly Notes); the search icon in the sidebar does the same |
 | `G` then `D` / `M` / `T` / `W` / `E` / `F` | Go to Dashboard / My Tasks / Today / Week planner / Editor / Focus |
 | `Ctrl+Alt+Space` | Quick capture from anywhere (desktop app) |
 
@@ -186,7 +188,7 @@ More: [Changelog](CHANGELOG.md) · [Guide for AI agents](docs/AGENT-GUIDE.md)
 
 | Area | What you can do |
 |---|---|
-| **Dashboard** | Greeting and daily overview, stats for today, progress ring, **Daily Top 3** with main goal, today's tasks, important dates, weekly progress, quick capture |
+| **Dashboard** | Greeting and daily overview, a figure strip for today, **Daily Top 3** with main goal, today's tasks, important dates, weekly progress, quick capture |
 | **Inbox** | Capture tasks without date, priority and category; with one click set them to Today/Tomorrow, sort them in the editor, or move them to My Tasks |
 | **My Tasks** | Search (title, description, notes, tags, subtasks, category), filters by status, priority, category, date, tag, sorting |
 | **Today / Upcoming** | Today plus overdue tasks ("all to today") · the next 14 days grouped by day, then "Later" |
@@ -215,7 +217,7 @@ Without internet nothing disruptive happens: automatic checks fail silently, a m
 The portable `.exe` and the developer version (`npm start`) do not update themselves and say so in the settings.
 
 > **One-time step for existing users of versions 1.0.0–2.1.1:** 1.0.0 had no update feature, and 2.0.0–2.1.1 looked for updates in a former repository.
-> Install `Todo4Me-Setup-2.9.0.exe` **once** over the old version (your data is kept). From then on, all further versions arrive automatically.
+> Install `Todo4Me-Setup-3.0.0.exe` **once** over the old version (your data is kept). From then on, all further versions arrive automatically.
 
 What changed in each version is listed in the [CHANGELOG](CHANGELOG.md).
 
@@ -579,7 +581,7 @@ Everything that enters a document (loading, pasting, import, undo) passes throug
 
 **Known limits:** footnotes print as endnotes (no footnotes at the bottom of each page); no multi-column layout and no per-section page formats; no real-time collaboration or cloud (Todo4Me is offline by design); the table of contents in a PDF has no page numbers.
 
-**Offline:** KaTeX, Prism and the fonts are in `vendor/` and are only loaded when the editor is opened (so the rest of the app starts quickly).
+**Offline:** KaTeX, Prism and the fonts are in `vendor/` (the editor files are only loaded when the editor is opened, so the rest of the app starts quickly; Inter, the app typeface, is bundled the same way).
 
 ## Data: saving, backup and restore
 
@@ -660,8 +662,8 @@ Releases are built by the GitHub Actions workflow `.github/workflows/release.yml
 **For every update**
 
 1. Increase the version number in `package.json` (it must **always be greater** than the last one) and add the section to `CHANGELOG.md`. Merge to `main`.
-2. Push the tag: `git tag v2.9.0 && git push origin v2.9.0` (the tag must equal `v` + the `package.json` version).
-3. The workflow builds all files and creates a **draft** release named *Todo4Me 2.9.0* with the CHANGELOG section as notes. It contains both `latest.yml` (Windows) and `latest-linux.yml` (Linux AppImage).
+2. Push the tag: `git tag v3.0.0 && git push origin v3.0.0` (the tag must equal `v` + the `package.json` version).
+3. The workflow builds all files and creates a **draft** release named *Todo4Me 3.0.0* with the CHANGELOG section as notes. It contains both `latest.yml` (Windows) and `latest-linux.yml` (Linux AppImage).
 4. On GitHub under *todo4me → Releases*, check the draft and click **Publish release**. From now on everyone gets the update.
 
 Running the workflow manually (*Actions → Release → Run workflow*) only builds and attaches the files as artifacts; it creates no release.
@@ -693,7 +695,7 @@ js/reminders.js      Reminders: scheduling, firing once, snooze (browser and des
 js/calfeeds.js       Calendar subscriptions: list, cache, refresh via fetchCalendar (in the browser only .ics import)
 scripts/start.js     Starts Electron for npm start/dev
 scripts/build.js     Build script, with --publish for releases
-scripts/vendor.js    Copies KaTeX, Prism and the fonts from node_modules to vendor/
+scripts/vendor.js    Copies KaTeX, Prism and the fonts (incl. Inter) from node_modules to vendor/
 build/icon.ico       Windows app icon (multi-size, size-specific artwork), generated by scripts/build-icons.mjs
 build/icons/         Linux icon set 16-1024 px (hicolor), generated by scripts/build-icons.mjs
 build/icon.png       1024 px master PNG (also generated)
@@ -734,15 +736,16 @@ todo4me/
 ├── scripts/              start.js, build.js, vendor.js, build-icons.mjs (icon generator)
 ├── build/                icon.ico (Windows), icons/ (Linux 16-1024 px), icon.png, brand/ (Tangram SVG sources)
 ├── assets/icons/         favicon.svg, icon.png (window icon), tray-16...64.png (tray icons)
-├── docs/                 AGENT-GUIDE.md, EDITOR-EXTENSIONS.md (editor module API), screenshots/, brand/ (logo lockups, social preview)
+├── docs/                 AGENT-GUIDE.md, EDITOR-EXTENSIONS.md (editor module API), DESIGN.md (art direction of the 3.0 look), screenshots/, brand/ (logo lockups, social preview)
 ├── vendor/               Offline files for the editor (MIT / SIL OFL, licenses included)
 │   ├── katex/            Formula rendering + fonts
 │   ├── prism/prism.js    Syntax highlighting (11 languages)
-│   └── fonts/            Fira Code, Carlito (Calibri-compatible)
+│   └── fonts/            Inter (app typeface), Fira Code, Carlito (Calibri-compatible)
 ├── tests/                Browser and desktop tests (Chrome DevTools Protocol, no npm dependencies),
 │                         ICS parser tests (test-ics.mjs) with fixtures (fixtures/ics/)
 ├── css/
-│   ├── styles.css        Design tokens (light/dark), components, views, responsive rules
+│   ├── styles.css        Design tokens (light/dark), shell, components, responsive rules
+│   ├── pages.css         Page styles (dashboard, tasks, planner, focus, settings, …)
 │   ├── editor.css        Editor page, document typography, widgets, print/PDF rules
 │   └── ed-*.css          Styles of the editor modules (knowledge, writing, versions, layout, ux)
 └── js/
@@ -889,7 +892,7 @@ Notes are grouped by the week that contains `weekOf`, according to the *Week sta
 {
   "userName": "",
   "theme": "system",          // "light" | "dark" | "system"
-  "accent": "#5b5bd6",        // hex color
+  "accent": "#6e56cf",        // hex color
   "defaultSort": "priority",  // "priority" | "due" | "created" | "alpha" | "status"
   "weekStart": 1,             // 1 = Monday, 0 = Sunday
   "showCompleted": true,
@@ -1034,4 +1037,4 @@ Current versions of Chrome, Edge, Firefox and Safari (desktop and mobile). Requi
 ## License
 
 Todo4Me is released under the [MIT License](LICENSE). Bundled third-party files in `vendor/` keep their own licenses
-(KaTeX and Prism: MIT; fonts Carlito and Fira Code: SIL Open Font License), included in the respective folders.
+(KaTeX and Prism: MIT; fonts Inter, Carlito and Fira Code: SIL Open Font License), included in the respective folders.

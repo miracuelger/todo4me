@@ -182,6 +182,7 @@ T4.app = (function () {
     render();
     window.scrollTo(0, 0);
     main.focus({ preventScroll: true });
+    if (pendingSearch) { pendingSearch = false; focusSearch(); }
   }
 
   /* ---------- Sidebar (mobile drawer) ---------- */
@@ -193,6 +194,21 @@ T4.app = (function () {
   function closeSidebar() { document.getElementById('app').classList.remove('sidebar-open'); }
   ui.on('open-sidebar', openSidebar);
   ui.on('close-sidebar', closeSidebar);
+
+  /* Sidebar search button: focus the search field of the current page, otherwise open My Tasks and focus its field. */
+  let pendingSearch = false;
+  function focusSearch() {
+    const s = main.querySelector('input[type="search"]');
+    if (!s) return false;
+    s.focus(); s.select();
+    return true;
+  }
+  ui.on('focus-search', () => {
+    closeSidebar();
+    if (focusSearch()) return;
+    pendingSearch = true;
+    location.hash = '#/tasks';
+  });
 
   /* ---------- Event delegation ---------- */
   function bindEvents() {

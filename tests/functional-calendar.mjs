@@ -232,7 +232,7 @@ export default async function calendarChecks(b, run) {
     ok($$('.cal-chip--ev').filter((x) => x.textContent === 'Offsite').length === 2, 'all-day event over two days in the all-day strip (DTEND exclusive)');
     ok(!$$('.cal-ev, .cal-chip--ev').some((x) => /Cancelled/.test(x.textContent)), 'cancelled event not shown');
     ok(!$('.cal img') && !window.__xss && evs[0].textContent.includes('<img src=x'), 'HTML in the event title is shown as text, never executed');
-    ok(!evs[0].hasAttribute('data-cal-task') && !evs[0].querySelector('[data-cal-resize]') && getComputedStyle(evs[0]).borderLeftStyle === 'solid' && getComputedStyle(evs[0]).borderTopStyle === 'dashed', 'events look different from tasks (hatched, dashed) and have no resize handle');
+    ok(!evs[0].hasAttribute('data-cal-task') && !evs[0].querySelector('[data-cal-resize]') && getComputedStyle(evs[0]).borderLeftStyle === 'solid' && (!$('.cal-blk') || getComputedStyle(evs[0]).backgroundColor !== getComputedStyle($('.cal-blk')).backgroundColor), 'events look different from tasks (tinted background) and have no resize handle');
     window.__evKey = evs[0].dataset.key;
   `);
   const ev = await box(`.cal-ev[data-key="${await b.evaluate('window.__evKey')}"]`);

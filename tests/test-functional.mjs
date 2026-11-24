@@ -623,27 +623,29 @@ export default async function (b) {
     T4.store.updateSettings({ theme: 'light', design: 'classic', accentSource: 'custom', accent: '#5b5bd6', font: 'design', radius: 'design', density: 'comfortable', fontScale: 100 });
     T4.settings.applyAppearance();
     ok(R.dataset.design === 'classic' && R.dataset.theme === 'light' && R.dataset.density === 'comfortable', 'themes: classic light attributes');
-    ok(cs('--bg') === '#f6f6f8' && cs('--radius') === '10px' && cs('--radius-sm') === '6px' && cs('--radius-lg') === '14px', 'themes: classic light tokens unchanged');
-    ok(getComputedStyle(document.body).fontSize === '14.5px' && cs('--space') === '1', 'themes: classic body size / spacing unchanged');
+    ok(cs('--bg') === '#f4f4f5' && cs('--radius') === '6px' && cs('--radius-sm') === '4px' && cs('--radius-lg') === '10px', 'themes: classic (Graphite) light tokens');
+    ok(getComputedStyle(document.body).fontSize === '13.5px' && cs('--space') === '1', 'themes: classic body size / spacing');
     T4.store.updateSettings({ theme: 'dark' }); T4.settings.applyAppearance();
-    ok(R.dataset.theme === 'dark' && cs('--bg') === '#0e0f12', 'themes: classic dark tokens unchanged');
+    ok(R.dataset.theme === 'dark' && cs('--bg') === '#0b0c0e', 'themes: classic (Graphite) dark tokens');
     T4.store.updateSettings({ design: 'tokio' }); T4.settings.applyAppearance();
     ok(R.dataset.design === 'tokio' && cs('--bg') === '#0a0920' && cs('--sidebar-bg') === '#070618', 'themes: design CSS block applies');
     T4.store.updateSettings({ theme: 'light' }); T4.settings.applyAppearance();
     ok(R.dataset.theme === 'dark' && TH.resolveMode(T4.store.settings) === 'dark', 'themes: dark-only design forces dark');
     ok(getComputedStyle($('.sidebar')).backgroundColor === 'rgb(7, 6, 24)', 'themes: sidebar uses --sidebar-bg');
-    ok(cs('--accent') === '#5b5bd6', 'themes: accentSource custom keeps the custom accent');
+    ok(cs('--accent') === '#ff4fc3', 'themes: the legacy 2.x default accent (#5b5bd6, custom) means "use the design accent"');
+    T4.store.updateSettings({ accent: '#0e7c86' }); T4.settings.applyAppearance();
+    ok(cs('--accent') === '#0e7c86' && cs('--accent-fg') === '#ffffff', 'themes: accentSource custom keeps a custom accent (and picks a readable text colour)');
     T4.store.updateSettings({ accentSource: 'design' }); T4.settings.applyAppearance();
     ok(cs('--accent') === '#ff4fc3', 'themes: accentSource design uses the design accent');
     T4.store.updateSettings({ design: 'development' }); T4.settings.applyAppearance();
     ok(cs('--radius') === '3px' && /Mono|monospace/i.test(cs('--heading-font')) && /sans-serif/.test(cs('--font')), 'themes: design radius / font / heading font');
     T4.store.updateSettings({ radius: 'round', font: 'serif' }); T4.settings.applyAppearance();
-    ok(cs('--radius') === '16px' && /serif/.test(cs('--font')) && cs('--heading-font') === cs('--font'), 'themes: radius / font overrides beat the design');
+    ok(cs('--radius') === '12px' && /serif/.test(cs('--font')) && cs('--heading-font') === cs('--font'), 'themes: radius / font overrides beat the design');
     T4.store.updateSettings({ design: 'classic', theme: 'light', radius: 'sharp', font: 'mono', density: 'compact', fontScale: 120 }); T4.settings.applyAppearance();
     ok(cs('--radius') === '3px' && cs('--radius-lg') === '5px' && R.dataset.density === 'compact' && cs('--space') === '.78', 'themes: sharp radius + compact density');
-    ok(cs('--font-scale') === '1.2' && getComputedStyle(document.body).fontSize === '17.4px', 'themes: fontScale scales the base text');
+    ok(cs('--font-scale') === '1.2' && getComputedStyle(document.body).fontSize === '16.2px', 'themes: fontScale scales the base text');
     T4.store.updateSettings({ design: 'classic', theme: 'light', accentSource: 'custom', accent: '#5b5bd6', font: 'design', radius: 'design', density: 'comfortable', fontScale: 100 }); T4.settings.applyAppearance();
-    ok(getComputedStyle(document.body).fontSize === '14.5px' && cs('--radius') === '10px', 'themes: back to defaults');
+    ok(getComputedStyle(document.body).fontSize === '13.5px' && cs('--radius') === '6px', 'themes: back to defaults');
   `);
 
   await run('designs', `
@@ -1071,7 +1073,7 @@ export default async function (b) {
     I.setLanguage('de');
     ok(document.documentElement.lang === 'de' && T4.store.settings.language === 'de' && I.locale().startsWith('de'), 'setLanguage → <html lang>, settings, locale');
     ok($('#sidebar').getAttribute('aria-label') === 'Hauptnavigation' && $('.skip-link').textContent === 'Zum Inhalt springen' && $('meta[name=description]').content.includes('Aufgaben'), 'data-i18n static texts (text, aria-label, meta content)');
-    ok($('.sidebar__capture span').textContent === 'Schnell erfassen', 'sidebar capture button translated');
+    ok($('.sidebar__capture span').textContent === 'Neue Aufgabe', 'sidebar compose button translated');
     const t0 = T4.util.today();
     ok(T4.util.relDate(t0) === 'Heute' && T4.util.relDate(T4.util.addDays(t0, 1)) === 'Morgen' && T4.util.relDate(T4.util.addDays(t0, -1)) === 'Gestern', 'relDate de');
     ok(T4.util.fmtMinutes(90) === '1 Std. 30 Min.', 'fmtMinutes de');
@@ -1294,7 +1296,7 @@ export default async function (b) {
     click('[data-action=set-radius][data-value=sharp]'); await wait(40);
     ok(st().radius === 'sharp' && cs('--radius') === '3px', 'appearance: corners sharp');
     click('[data-action=set-radius][data-value=round]'); await wait(40);
-    ok(st().radius === 'round' && cs('--radius') === '16px' && $$('[data-rg=radius] .rpv').length === 4, 'appearance: corners round (+ visual)');
+    ok(st().radius === 'round' && cs('--radius') === '12px' && $$('[data-rg=radius] .rpv').length === 4, 'appearance: corners round (+ visual)');
     click('[data-action=set-density][data-value=compact]'); await wait(40);
     ok(st().density === 'compact' && R.dataset.density === 'compact', 'appearance: density compact');
     click('[data-action=set-density][data-value=comfortable]'); await wait(40);
@@ -1354,7 +1356,7 @@ export default async function (b) {
     click('#confirm [data-confirm=no]'); await wait(60);
     ok(st().design === 'tokio', 'appearance: cancelling the confirmation keeps everything');
     click('[data-action=reset-appearance]'); await confirmYes();
-    ok(st().design === 'classic' && st().theme === 'system' && st().accentSource === 'custom' && st().accent === '#5b5bd6' && st().font === 'design' && st().radius === 'design' && st().density === 'comfortable' && st().fontScale === 100 && R.dataset.design === 'classic', 'appearance: reset restores the defaults');
+    ok(st().design === 'classic' && st().theme === 'system' && st().accentSource === 'design' && st().accent === T4.storage.ACCENTS[0] && st().font === 'design' && st().radius === 'design' && st().density === 'comfortable' && st().fontScale === 100 && R.dataset.design === 'classic', 'appearance: reset restores the defaults');
     const undo = $$('.toast__action').find(b => b.textContent === 'Undo');
     ok(!!undo, 'appearance: reset offers an Undo toast');
     undo.click(); await wait(60);
@@ -1366,7 +1368,7 @@ export default async function (b) {
   await b.reload();
   await run('settings-appearance-persist', `
     const R = document.documentElement, cs = (p) => getComputedStyle(R).getPropertyValue(p).trim();
-    ok(R.dataset.design === 'tokio' && R.dataset.density === 'compact' && cs('--radius') === '16px' && cs('--font-scale') === '1.1' && cs('--accent') === '#ff4fc3', 'appearance: design, density, corners, text size and accent persist across reload');
+    ok(R.dataset.design === 'tokio' && R.dataset.density === 'compact' && cs('--radius') === '12px' && cs('--font-scale') === '1.1' && cs('--accent') === '#ff4fc3', 'appearance: design, density, corners, text size and accent persist across reload');
     ok(T4.nav.isHidden('focus') && !$('#nav a[href="#/focus"]'), 'appearance: sidebar customization persists');
     await go('settings');
     ok($('.dcard[data-value=tokio]').getAttribute('aria-checked') === 'true' && $('#set-scale').value === '110' && $('[data-action=set-font][data-value=serif]').getAttribute('aria-checked') === 'true', 'appearance: settings page reflects the persisted choices');

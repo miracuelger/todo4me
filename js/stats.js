@@ -34,10 +34,11 @@ T4.stats = (function () {
       '<div class="chart__labels" aria-hidden="true">' + labels + '</div>' + table + '</div>';
   }
 
-  function tile(label, value, sub, iconName) {
-    return '<div class="stat"><span class="stat__icon">' + icon(iconName) + '</span><div>' +
+  /** One figure of the strip: number, small label, optional hint (already escaped). */
+  function tile(label, value, sub) {
+    return '<div class="stat">' +
       '<div class="stat__value">' + value + '</div><div class="stat__label">' + esc(label) + '</div>' +
-      (sub ? '<div class="stat__hint">' + sub + '</div>' : '') + '</div></div>';
+      (sub ? '<div class="stat__hint">' + sub + '</div>' : '') + '</div>';
   }
 
   T4.views.stats = {
@@ -94,20 +95,20 @@ T4.stats = (function () {
 
       return '<header class="page-head"><div><h1 class="page-title">' + esc(tt('nav.stats')) + '</h1><p class="page-sub">' + esc(tt('st.sub')) + '</p></div></header>' +
         '<section class="stats stats--4" aria-label="' + esc(tt('st.keyNumbers')) + '">' +
-          tile(tt('st.doneToday'), doneToday, '', 'check') +
-          tile(tt('st.thisWeek'), doneWeek, esc(deltaTxt), 'week') +
-          tile(tt('st.thisMonth'), doneMonth, esc(U.fmt(today, { month: 'long' })), 'calendar') +
-          tile(tt('st.rate'), Math.round(rate * 100) + '%', esc(tt('st.rateSub', { done, count: total })), 'chart') +
+          tile(tt('st.doneToday'), doneToday, '') +
+          tile(tt('st.thisWeek'), doneWeek, esc(deltaTxt)) +
+          tile(tt('st.thisMonth'), doneMonth, esc(U.fmt(today, { month: 'long' }))) +
+          tile(tt('st.rate'), Math.round(rate * 100) + '%', esc(tt('st.rateSub', { done, count: total }))) +
         '</section>' +
-        '<div class="dash-grid">' +
-          '<section class="card"><div class="card__head"><h2 class="card__title">' + icon('week') + esc(tt('st.doneThisWeek')) + '</h2></div>' + barChart(weekPoints, tt('st.perDay')) + '</section>' +
-          '<section class="card"><div class="card__head"><h2 class="card__title">' + icon('chart') + esc(tt('st.trend')) + '</h2><span class="muted small">' + esc(tt('st.last8')) + '</span></div>' + barChart(trendPoints, tt('st.perWeek')) + '</section>' +
-          '<section class="card"><div class="card__head"><h2 class="card__title">' + icon('flag') + esc(tt('st.byPriority')) + '</h2></div>' +
+        '<div class="stats-grid">' +
+          '<section class="card"><div class="card__head"><h2 class="card__title">' + esc(tt('st.doneThisWeek')) + '</h2></div>' + barChart(weekPoints, tt('st.perDay')) + '</section>' +
+          '<section class="card"><div class="card__head"><h2 class="card__title">' + esc(tt('st.trend')) + '</h2><span class="muted small">' + esc(tt('st.last8')) + '</span></div>' + barChart(trendPoints, tt('st.perWeek')) + '</section>' +
+          '<section class="card"><div class="card__head"><h2 class="card__title">' + esc(tt('st.byPriority')) + '</h2></div>' +
             (open.length ? prioRows : '<p class="muted small">' + esc(tt('st.noOpen')) + '</p>') + '</section>' +
-          '<section class="card"><div class="card__head"><h2 class="card__title">' + icon('tag') + esc(tt('st.byCategory')) + '</h2></div>' +
+          '<section class="card"><div class="card__head"><h2 class="card__title">' + esc(tt('st.byCategory')) + '</h2></div>' +
             (catRows || '<p class="muted small">' + esc(tt('st.assignCats')) + '</p>') +
             '<div class="mini-stats"><div><strong>' + st + '</strong><span>' + esc(tt('st.streak')) + '</span></div><div><strong>' + focusWeek + '</strong><span>' + esc(tt('st.focusWeek')) + '</span></div>' +
-            '<div><strong>' + ui.progressRing(rate, 64, tt('st.overallRing', { pct: Math.round(rate * 100) })) + '</strong><span>' + esc(tt('st.overall')) + '</span></div></div>' +
+            '<div><strong aria-label="' + esc(tt('st.overallRing', { pct: Math.round(rate * 100) })) + '">' + Math.round(rate * 100) + '%</strong><span>' + esc(tt('st.overall')) + '</span></div></div>' +
           '</section>' +
         '</div>';
     },

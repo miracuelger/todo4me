@@ -43,15 +43,15 @@
 .ed-ly-notes li { margin: 2pt 0; }
 .ed-ly-notes__text.is-empty { color: #9aa0ab; font-style: italic; }
 .ed-ly-notes__back { border: 0; background: none; color: #2453c8; cursor: pointer; padding: 0 4px; font-size: 11pt; }
-.ed-ly-pop { position: fixed; z-index: 1300; width: 340px; max-width: calc(100vw - 16px); padding: 10px; background: var(--surface); color: var(--text); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-lg); }
-.ed-ly-pop textarea { width: 100%; box-sizing: border-box; resize: vertical; font: inherit; background: var(--surface-2); color: var(--text); border: 1px solid var(--border); border-radius: 6px; padding: 6px 8px; }
+.ed-ly-pop { position: fixed; z-index: 1300; width: 340px; max-width: calc(100vw - 16px); padding: 10px; background: var(--ed-pop-bg); color: var(--text); border: 1px solid var(--border-strong); border-radius: var(--radius); box-shadow: var(--ed-pop-shadow); }
+.ed-ly-pop textarea { width: 100%; box-sizing: border-box; resize: vertical; font: inherit; background: var(--surface); color: var(--text); border: 1px solid var(--border-strong); border-radius: var(--radius); padding: 6px 8px; }
 .ed-ly-pop__row { display: flex; justify-content: flex-end; gap: 6px; margin-top: 8px; }
 @media print { .ed-ly-notes__back { display: none; } .ed-ly-notes { break-inside: auto; } }
 
 /* Page preview: clearer page-break guides and the margin frame */
 .ed-page.ed-ly-preview::before { opacity: 0; }
-.ed-page.ed-ly-preview::after { content: ""; position: absolute; top: var(--m-t); bottom: var(--m-b); left: var(--m-l); right: var(--m-r); border: 1px dashed rgba(79, 107, 237, .35); pointer-events: none; }
+.ed-page.ed-ly-preview::after { content: ""; position: absolute; top: var(--m-t); bottom: var(--m-b); left: var(--m-l); right: var(--m-r); border: 1px dashed rgba(74, 125, 255, .4); pointer-events: none; }
 .ed-ly-guides { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
-.ed-ly-guide { position: absolute; left: 0; right: 0; height: 0; border-top: 2px solid rgba(79, 107, 237, .65); }
-.ed-ly-guide::before { content: ""; position: absolute; left: 0; right: 0; top: -7px; height: 14px; background: rgba(79, 107, 237, .08); }
-.ed-ly-guide span { position: absolute; right: 8px; top: -9px; padding: 0 6px; font: 600 9pt Calibri, Carlito, sans-serif; color: #4f6bed; background: #fff; border-radius: 3px; }
+.ed-ly-guide { position: absolute; left: 0; right: 0; height: 0; border-top: 2px solid rgba(74, 125, 255, .65); }
+.ed-ly-guide::before { content: ""; position: absolute; left: 0; right: 0; top: -7px; height: 14px; background: rgba(74, 125, 255, .08); }
+.ed-ly-guide span { position: absolute; right: 8px; top: -9px; padding: 0 6px; font: 600 9pt Calibri, Carlito, sans-serif; color: #4a7dff; background: #fff; border-radius: 3px; }

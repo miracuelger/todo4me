@@ -128,7 +128,7 @@ T4.ui = (function () {
     Array.from(el.querySelectorAll('.toast__action')).forEach((b) => b.addEventListener('click', () => { actionsList[Number(b.dataset.i)].fn(); remove(); }));
     toastsEl.appendChild(el);
     while (toastsEl.children.length > 4) toastsEl.firstChild.remove();
-    setTimeout(remove, ms || (actionsList.length ? 6000 : 3200));
+    setTimeout(remove, ms || (actionsList.length ? 6000 : 4000));
     return el;
   }
 

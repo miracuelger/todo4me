@@ -28,7 +28,8 @@ T4.storage = (function () {
   const DENSITIES = ['comfortable', 'compact'];
   const LANGUAGES = ['auto', 'en', 'de', 'tr', 'es'];
   const UI_MODES = ['simple', 'advanced'];
-  const ACCENTS = ['#5b5bd6', '#0e7c86', '#2f6fed', '#d6409f', '#e5603c', '#3e9b4f', '#8e4ec6', '#5f6b7a'];
+  const ACCENTS = ['#6e56cf', // violet swatch (2.x stored #5b5bd6 as its default; that value now means "design accent", see js/themes.js)
+    '#0e7c86', '#2f6fed', '#d6409f', '#e5603c', '#3e9b4f', '#8e4ec6', '#5f6b7a'];
 
   const DEFAULT_CATEGORIES = [
     { id: 'cat_work', name: 'Work', color: '#2f6fed' },
@@ -51,7 +52,7 @@ T4.storage = (function () {
       pomodoroBreak: 5,
       reminderTime: '09:00', // when to remind for tasks that have a due date but no time
       design: 'classic',       // look preset id (js/themes.js); unknown ids fall back to classic
-      accentSource: 'custom',  // 'design' = use the design's accent, 'custom' = settings.accent
+      accentSource: 'design',  // 'design' = use the design's accent, 'custom' = settings.accent
       font: 'design',
       radius: 'design',
       density: 'comfortable',

@@ -45,14 +45,21 @@ fs.mkdirSync(OUT, { recursive: true });
 cp(SITE, OUT);
 
 // 2. screenshots + brand images (copied, never moved)
+// Screenshots the page uses: [name on the site, preferred source, fallback source] (all in docs/screenshots/).
+// The page only references the first name (img/screenshots/<name>). To update the site, regenerate the preferred
+// source files (dark theme, 1440x900) from the running app; the fallback is used until they exist.
 const SHOTS = [
-  'dashboard-light.png', 'dashboard-dark.png', 'planner-calendar-light.png', 'planner-calendar-dark.png',
-  'editor-light.png', 'editor-dark.png', 'tasks-light.png', 'notes-light.png', 'planner-days-light.png',
-  'statistics-light.png', 'focus-dark.png', 'repeat-editor-light.png', 'mobile-menu.png',
-  'designs/tokio-dark-dashboard.png', 'designs/paper-light-planner.png', 'designs/development-dark-editor.png',
-  'editor-workspace-light.png', 'editor-graph.png', 'editor-ink-light.png',
+  ['hero-dashboard.png', 'dashboard-dark.png'],
+  ['tasks.png', 'tasks-dark.png', 'tasks-light.png'],
+  ['planner.png', 'planner-calendar-dark.png'],
+  ['documents.png', 'editor-workspace-dark.png', 'editor-dark.png'],
+  ['ink.png', 'editor-ink-dark.png', 'editor-ink-light.png'],
 ];
-for (const f of SHOTS) cp(path.join(ROOT, 'docs', 'screenshots', f), path.join(OUT, 'img', 'screenshots', f));
+for (const [name, ...sources] of SHOTS) {
+  const src = sources.map((f) => path.join(ROOT, 'docs', 'screenshots', f)).find((f) => fs.existsSync(f));
+  if (!src) throw new Error('Missing screenshot for ' + name + ': ' + sources.join(' or '));
+  cp(src, path.join(OUT, 'img', 'screenshots', name));
+}
 cp(path.join(ROOT, 'docs', 'brand', 'mark.svg'), path.join(OUT, 'img', 'brand', 'mark.svg'));
 cp(path.join(ROOT, 'docs', 'brand', 'social-preview.png'), path.join(OUT, 'social-preview.png'));
 cp(path.join(ROOT, 'assets', 'icons', 'favicon.svg'), path.join(OUT, 'favicon.svg'));

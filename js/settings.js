@@ -31,7 +31,7 @@ T4.settings = (function () {
   /* ---------- Appearance & customization (2.3.0) ---------- */
   const tr = (k, p) => T4.i18n.t(k, p);
   const HEX6 = /^#[0-9a-f]{6}$/i;
-  const APPEARANCE_DEFAULTS = () => ({ design: 'classic', theme: 'system', accentSource: 'custom', accent: S.ACCENTS[0], font: 'design', radius: 'design', density: 'comfortable', fontScale: 100 });
+  const APPEARANCE_DEFAULTS = () => ({ design: 'classic', theme: 'system', accentSource: 'design', accent: S.ACCENTS[0], font: 'design', radius: 'design', density: 'comfortable', fontScale: 100 });
   const setAppearance = (patch) => { store.updateSettings(patch); applyAppearance(); };
 
   ui.on('set-design', (el) => setAppearance({ design: el.dataset.value }));
@@ -314,7 +314,7 @@ T4.settings = (function () {
       }).join('');
     })();
 
-    return '<section class="card settings__section appearance" id="set-appearance"><h2 class="card__title">' + icon('droplet') + esc(tr('set.appearance.title')) + '</h2>' +
+    return '<section class="card settings__section appearance" id="set-appearance"><h2 class="card__title">' + esc(tr('set.appearance.title')) + '</h2>' +
       '<p class="muted small appearance__sub">' + esc(tr('set.appearance.sub')) + '</p>' +
 
       '<div class="setting setting--stack"><span class="label" id="lbl-design">' + esc(tr('set.appearance.design')) + '</span>' +
@@ -362,7 +362,7 @@ T4.settings = (function () {
       const kb = (S.usageBytes() / 1024).toFixed(1);
       return '<header class="page-head"><div><h1 class="page-title">' + esc(tr('nav.settings')) + '</h1><p class="page-sub">' + esc(tr('set.sub')) + '</p></div></header>' +
         '<div class="settings">' +
-        '<section class="card settings__section" id="set-mode"><h2 class="card__title">' + icon('sparkle') + esc(tr('mode.title')) + '</h2>' +
+        '<section class="card settings__section" id="set-mode"><h2 class="card__title">' + esc(tr('mode.title')) + '</h2>' +
           '<p class="muted small">' + esc(tr('mode.settings.help')) + '</p>' + T4.mode.cards(T4.mode.get(), 'set-mode') + '</section>' +
 
         '<section class="card settings__section"><h2 class="card__title">' + esc(tr('set.profile')) + '</h2>' +
@@ -408,7 +408,7 @@ T4.settings = (function () {
           '</div>' +
           '<p class="muted small">' + esc(backupAt ? tr('set.autoBackup', { date: U.fmtDateTime(backupAt) }) : tr('set.noAutoBackup')) + '</p>' +
           '<div class="danger-zone"><div><strong>' + esc(tr('set.resetApp')) + '</strong><p class="muted small">' + esc(tr('set.resetAppHelp')) + '</p></div>' +
-            '<button type="button" class="btn btn--danger" data-action="reset-data">' + icon('trash') + esc(tr('set.resetAll')) + '</button></div>' +
+            '<button type="button" class="btn btn--ghost btn--danger-text" data-action="reset-data">' + icon('trash') + esc(tr('set.resetAll')) + '</button></div>' +
         '</section>' +
 
         '<section class="card settings__section"><h2 class="card__title">' + esc(tr('set.shortcuts')) + '</h2>' +

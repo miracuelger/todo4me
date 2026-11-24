@@ -1,4 +1,4 @@
-/* Todo4Me website: language, theme, OS detection, release lookup, copy buttons, lightbox. No dependencies. */
+/* Todo4Me website: language, OS detection, release lookup, copy buttons, header. No dependencies. */
 (function () {
   'use strict';
   var REPO = 'muelgerhbf/todo4me';
@@ -31,7 +31,6 @@
     ['alt', 'aria-label', 'title'].forEach(function (a) {
       $$('[data-i18n-' + a + ']').forEach(function (el) { el.setAttribute(a, t(el.getAttribute('data-i18n-' + a))); });
     });
-    $$('.shot[data-cap]').forEach(function (b) { b.setAttribute('aria-label', t('shots.open', { name: t(b.getAttribute('data-cap')) })); });
     document.title = t('meta.title');
     var md = $('meta[name="description"]');
     if (md) md.setAttribute('content', t('meta.description'));
@@ -46,16 +45,6 @@
     lang = next;
     store('todo4me.site.lang', next);
     applyLanguage();
-  }
-
-  /* ---------- Theme ---------- */
-  function setTheme(next) {
-    root.setAttribute('data-theme', next);
-    store('todo4me.site.theme', next);
-    var meta = $$('meta[name="theme-color"]');
-    meta.forEach(function (m) { m.removeAttribute('media'); });
-    if (meta[0]) meta[0].setAttribute('content', next === 'dark' ? '#0E0E12' : '#ffffff');
-    if (meta[1]) meta[1].remove();
   }
 
   /* ---------- OS detection ---------- */
@@ -213,42 +202,7 @@
     });
   }
 
-  /* ---------- Lightbox ---------- */
-  function initLightbox() {
-    var dlg = $('#lightbox');
-    if (!dlg || typeof dlg.showModal !== 'function') return;
-    var img = $('#lb-img'), cap = $('#lb-cap');
-    var shots = $$('#gallery .shot');
-    var index = 0;
-    var opener = null;
-
-    function visibleImg(btn) {
-      var imgs = $$('img', btn);
-      for (var i = 0; i < imgs.length; i++) if (imgs[i].offsetParent !== null) return imgs[i];
-      return imgs[0];
-    }
-    function show(i) {
-      index = (i + shots.length) % shots.length;
-      var src = visibleImg(shots[index]);
-      img.src = src.getAttribute('src');
-      img.alt = src.getAttribute('alt') || '';
-      cap.textContent = t(shots[index].getAttribute('data-cap'));
-    }
-    shots.forEach(function (b, i) {
-      b.addEventListener('click', function () { opener = b; show(i); dlg.showModal(); });
-    });
-    $('#lb-close').addEventListener('click', function () { dlg.close(); });
-    $('#lb-prev').addEventListener('click', function () { show(index - 1); });
-    $('#lb-next').addEventListener('click', function () { show(index + 1); });
-    dlg.addEventListener('click', function (e) { if (e.target === dlg || e.target.tagName === 'FIGURE') dlg.close(); });
-    dlg.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowLeft') { show(index - 1); e.preventDefault(); }
-      else if (e.key === 'ArrowRight') { show(index + 1); e.preventDefault(); }
-    });
-    dlg.addEventListener('close', function () { img.removeAttribute('src'); if (opener) opener.focus(); });
-  }
-
-  /* ---------- Header: mobile menu, language, theme ---------- */
+  /* ---------- Header: mobile menu, language, hairline on scroll ---------- */
   function initHeader() {
     var nav = $('#nav'), btn = $('#menu-btn');
     function setMenu(open) { nav.classList.toggle('is-open', open); btn.setAttribute('aria-expanded', String(open)); }
@@ -257,14 +211,16 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && nav.classList.contains('is-open')) { setMenu(false); btn.focus(); } });
 
     $$('[data-lang]').forEach(function (b) { b.addEventListener('click', function () { setLanguage(b.getAttribute('data-lang')); }); });
-    $('#theme-toggle').addEventListener('click', function () { setTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'); });
+    var header = $('.site-header');
+    function onScroll() { header.classList.toggle('is-scrolled', window.scrollY > 8); }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
   }
 
   /* ---------- Init ---------- */
   state.os = detectOS();
   initHeader();
   initCopy();
-  initLightbox();
   applyLanguage();
   loadRelease();
 })();

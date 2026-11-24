@@ -733,3 +733,24 @@ Not verified: rpm install on a real rpm distribution (argv unit checks only), Wi
 - No handwriting-to-LaTeX and no electrical-symbol recognition (no offline recogniser fits the CSP; original ink is kept). Overlay annotations export to Word/HTML as a separate image, an overlay across a PDF page break is not split, shapes below about 70 units (7 % of the text width) are not auto-recognised, real pen hardware was tested only with synthetic events, a canvas holds up to 5000 items / about 2 MB; with 2000 strokes adding a stroke takes about 18 ms (about 13 ms is the editor's undo snapshot).
 
 **Docs and release material**: README section "Pen and handwriting" with a screenshot from the running app (`tests/test-ink-shots.mjs`, `docs/screenshots/editor-ink-light.png`), CHANGELOG 2.9.0, `docs/EDITOR-EXTENSIONS.md` module table, version 2.9.0.
+
+
+### Step 35: Redesign "Graphite" (3.0.0)
+
+**Goal**: replace the 2.x look, which the user found "AI-like", with a calm, distinctive design for the app, the editor and the website, without changing features or data.
+
+**Process (multi-agent)**
+
+- **Brief:** the user gave a reference image (a dark developer-tool landing page) and a design directive (no AI-generic patterns).
+- **Analysis and art direction:** the lead analysed the old screens and wrote `docs/DESIGN.md` (art direction and contract), vendored Inter (`vendor/fonts/inter-*`, devDependency `@fontsource-variable/inter`, `scripts/vendor.js`) and split the page styles into `css/pages.css`.
+- **Four coders in parallel** on disjoint files with their own CDP ports: shell (9341), pages (9342), editor (9343), site (9344).
+- **Review and fixes by the lead:** storage default `accentSource: 'design'`, violet swatch `#6e56cf`, Graphite taglines in four languages, calendar resize guard (a pre-existing crash before the first page render), Electron update-button tests adapted to the new sidebar and corner radius, reduced-motion transitions off. The user reviewed the local website and approved the look.
+- **Further lead fixes:** the Electron update button follows the accent immediately (reduced motion: `transition: none`); the update-button tests now check the new position (below the logo row) and the design radius.
+- **Tests (final lead runs, Linux, sequential, port 9333):** editor 2257/0 in the first full run after integration; after the last CSS fix (reduced motion turns transitions off) editor 2253/4, the 4 failures only in the known timing-sensitive ux block-drag tests, standalone ux 114/0 twice; functional 708/0, modes 78/0, ICS 62/0, electron 181/0 (after adapting two update-button tests to the new sidebar and radius and fixing the reduced-motion transitions); page errors 0.
+
+**Architecture decisions**
+
+- Design is carried by tokens: Graphite is still the design id `classic` (existing settings keep working); users whose stored accent was the old violet default are treated as `accentSource: 'design'`, no data migration needed.
+- Inter is bundled (offline, no network fonts); the other seven designs are kept and adapted.
+
+**Docs and release material**: `docs/DESIGN.md`, README (look, designs, shortcuts, file tree), CHANGELOG 3.0.0, every screenshot in `docs/screenshots/` retaken from the running app with sample data (plus new `editor-workspace-dark.png`), website rebuilt with `node scripts/build-site.mjs`, version 3.0.0.

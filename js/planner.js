@@ -69,7 +69,7 @@ T4.planner = (function () {
         '</section>' +
         '<p class="muted small hint-dnd">' + esc(tt('pl.tip')) + '</p>' +
         '<div class="week-grid">' + days.map(dayColumn).join('') + '</div>' +
-        '<section class="section mt-lg"><div class="section__head"><h2 class="section__title">' + icon('note') + esc(tt('pl.notesWeek')) + ' <span class="count">' + notes.length + '</span></h2>' +
+        '<section class="section mt-lg"><div class="section__head"><h2 class="section__title">' + esc(tt('pl.notesWeek')) + ' <span class="count">' + notes.length + '</span></h2>' +
           '<button type="button" class="btn btn--sm" data-action="new-note" data-week="' + ws + '">' + icon('plus') + esc(tt('pl.addNote')) + '</button></div>' +
           (notes.length ? '<div class="notes-grid">' + notes.map(T4.notes.card).join('') + '</div>'
             : '<p class="muted small">' + esc(tt('pl.noNotes')) + '</p>') +
@@ -211,10 +211,10 @@ T4.planner = (function () {
             '</div></div></header>' +
         '<div class="plan-grid">' +
           '<div class="dash-col">' +
-            '<section class="card"><label class="card__title" for="plan-goal">' + icon('target') + esc(tt('db.mainGoal')) + '</label>' +
+            '<section class="card"><label class="card__title" for="plan-goal">' + esc(tt('db.mainGoal')) + '</label>' +
               '<input id="plan-goal" class="goal-input" type="text" maxlength="500" data-input="plan-field" data-change="plan-field" data-key="goal" data-date="' + d + '" value="' + esc(plan.goal) + '" placeholder="' + esc(tt(isToday ? 'pl.goalPhToday' : 'pl.goalPhDay')) + '"></section>' +
             T4.dashboard.top3Card(d, true) +
-            '<section class="card"><div class="card__head"><h2 class="card__title">' + icon('list') + esc(tt('pl.tasks')) + ' <span class="count">' + done + '/' + dayTasks.length + '</span></h2>' +
+            '<section class="card"><div class="card__head"><h2 class="card__title">' + esc(tt('pl.tasks')) + ' <span class="count">' + done + '/' + dayTasks.length + '</span></h2>' +
               '<button type="button" class="btn btn--sm btn--ghost" data-action="new-task" data-date="' + d + '">' + icon('plus') + esc(tt('pl.new')) + '</button></div>' +
               tasks.list(dayTasks, { hideDate: true, top3Date: d }, '<p class="muted small">' + esc(tt('pl.noTasksDay')) + '</p>') +
               '<form class="quick-add quick-add--flat mt-sm" data-form="quick-add" data-defaults="' + esc(JSON.stringify({ dueDate: d, priority: 'medium' })) + '" id="qa-plan">' +
@@ -222,9 +222,9 @@ T4.planner = (function () {
             '</section>' +
           '</div>' +
           '<div class="dash-col">' +
-            '<section class="card"><label class="card__title" for="plan-notes">' + icon('note') + esc(tt('pl.dailyNotes')) + '</label>' +
+            '<section class="card"><label class="card__title" for="plan-notes">' + esc(tt('pl.dailyNotes')) + '</label>' +
               '<textarea id="plan-notes" class="plan-text" rows="7" data-input="plan-field" data-change="plan-field" data-key="notes" data-date="' + d + '" placeholder="' + esc(tt('pl.dailyNotesPh')) + '">' + esc(plan.notes) + '</textarea></section>' +
-            '<section class="card"><label class="card__title" for="plan-reflection">' + icon('sparkle') + esc(tt('pl.reflection')) + '</label>' +
+            '<section class="card"><label class="card__title" for="plan-reflection">' + esc(tt('pl.reflection')) + '</label>' +
               '<p class="muted small">' + esc(tt(isPast || isToday ? 'pl.reflectNow' : 'pl.reflectLater')) + '</p>' +
               '<textarea id="plan-reflection" class="plan-text" rows="6" data-input="plan-field" data-change="plan-field" data-key="reflection" data-date="' + d + '" placeholder="' + esc(tt('pl.reflectPh')) + '">' + esc(plan.reflection) + '</textarea></section>' +
           '</div>' +

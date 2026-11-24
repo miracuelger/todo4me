@@ -16,9 +16,11 @@ T4.tasks = (function () {
   const SORT_LABELS = lab({ priority: 'sort.priority', due: 'sort.due', created: 'sort.created', alpha: 'sort.alpha', status: 'sort.status' });
 
   /* ======================= Components ======================= */
-  function priorityBadge(p) {
+  /** Priority as plain coloured text with a flag. iconOnly: just the flag (task rows; the label stays for screen readers). */
+  function priorityBadge(p, iconOnly) {
     if (!p) return '';
-    return '<span class="badge badge--' + p + '" title="' + esc(PRIORITY[p].hint) + '">' + icon('flag') + PRIORITY[p].label + '</span>';
+    return '<span class="badge badge--' + p + (iconOnly ? ' badge--icon' : '') + '" title="' + esc(PRIORITY[p].hint) + '">' + icon('flag') +
+      (iconOnly ? '<span class="sr-only">' + PRIORITY[p].label + '</span>' : PRIORITY[p].label) + '</span>';
   }
 
   function categoryChip(id) {
@@ -27,17 +29,18 @@ T4.tasks = (function () {
     return '<span class="chip chip--cat"><span class="dot" style="background:' + esc(c.color) + '"></span>' + esc(c.name) + '</span>';
   }
 
+  /** Due date/time as plain meta text: --danger when overdue, --text-2 when due today (classes chip--danger / chip--accent are kept as hooks). */
   function dueChip(t) {
     if (!t.dueDate) return '';
     const overdue = store.isOverdue(t);
     const today = t.dueDate === U.today();
     const cls = t.status === 'done' ? '' : overdue ? ' chip--danger' : today ? ' chip--accent' : '';
-    return '<span class="chip' + cls + '">' + icon(t.dueTime ? 'clock' : 'calendar') +
+    return '<span class="chip chip--due' + cls + '">' + icon(t.dueTime ? 'clock' : 'calendar') +
       esc(U.relDate(t.dueDate)) + (t.dueTime ? ' · ' + esc(U.fmtTime(t.dueTime)) : '') + '</span>';
   }
 
   /**
-   * One task row.
+   * One task row: status ring, title, and the meta as plain text on the right (it wraps under the title on narrow widths).
    * opts: { hideDate, hideCategory, draggable, compact, top3Date, actions:false }
    */
   function row(t, opts) {
@@ -48,14 +51,14 @@ T4.tasks = (function () {
     const subDone = t.subtasks.filter((s) => s.done).length;
     const meta = [];
     if (t.status === 'in_progress') meta.push('<span class="chip chip--progress">' + icon('progress') + esc(STATUS.in_progress) + '</span>');
+    if (t.priority === 'critical' || t.priority === 'high') meta.push(priorityBadge(t.priority, true));
     if (!opts.hideDate) meta.push(dueChip(t));
-    if (!opts.compact) meta.push(priorityBadge(t.priority));
-    if (!opts.hideCategory) meta.push(categoryChip(t.categoryId));
     if (t.subtasks.length) meta.push('<span class="chip">' + icon('list') + subDone + '/' + t.subtasks.length + '</span>');
-    if (t.estimate && !opts.compact) meta.push('<span class="chip">' + icon('clock') + U.fmtMinutes(t.estimate) + '</span>');
+    if (t.estimate && !opts.compact) meta.push('<span class="chip" title="' + esc(tt('tk.fEstimate')) + '">' + U.fmtMinutes(t.estimate) + '</span>');
     if (t.recurrence) meta.push('<span class="chip" title="' + esc(tt('tk.repeats', { rule: T4.recur.describe(t.recurrence) })) + '">' + icon('repeat') + (opts.compact ? '' : esc(T4.recur.describe(t.recurrence, { short: true }))) + '</span>');
     if (t.reminder != null && t.dueDate && !done && T4.reminders) meta.push('<span class="chip chip--reminder" title="' + esc(tt('tk.reminderTip', { label: T4.reminders.label(t.reminder) })) + '">' + icon('bell') + '<span class="sr-only">' + esc(tt('tk.reminder')) + '</span></span>');
     if (!opts.compact) t.tags.forEach((g) => meta.push('<span class="chip chip--tag">#' + esc(g) + '</span>'));
+    if (!opts.hideCategory) meta.push(categoryChip(t.categoryId));
     const metaHtml = meta.filter(Boolean).join('');
 
     return '<li class="task prio-' + (t.priority || 'none') + (done ? ' is-done' : '') + (store.isOverdue(t) ? ' is-overdue' : '') + (opts.compact ? ' task--compact' : '') + '" data-id="' + t.id + '"' +
@@ -787,7 +790,7 @@ T4.tasks = (function () {
             '<button type="button" class="icon-btn icon-btn--sm icon-btn--danger" data-action="delete-task" data-id="' + t.id + '" aria-label="' + esc(tt('tk.deleteTask')) + '">' + icon('trash') + '</button>' +
           '</div></li>').join('');
       return pageHeader(tt('nav.inbox'), esc(tt('tk.inboxSub') + (items.length ? ' ' + tt('tk.inboxWaiting', { count: items.length }) : ''))) +
-        '<section class="card">' + quickAddForm({ inbox: true }, tt('tk.inboxPh'), 'qa-inbox') + '</section>' +
+        '<section class="capture">' + quickAddForm({ inbox: true }, tt('tk.inboxPh'), 'qa-inbox') + '</section>' +
         '<section class="mt">' + (items.length ? '<ul class="inbox-list" role="list">' + rows + '</ul>'
           : ui.emptyState('inbox', tt('tk.inboxZero'), tt('tk.inboxZeroText'))) + '</section>';
     },
@@ -830,7 +833,7 @@ T4.tasks = (function () {
       const sort = filters.sort || store.settings.defaultSort;
       const cats = store.data.categories;
       return pageHeader(tt('nav.tasks'), esc(tt('tk.tasksSub')), newTaskBtn()) +
-        '<section class="card">' + quickAddForm({}, tt('tk.tasksPh'), 'qa-tasks') + '</section>' +
+        '<section class="capture">' + quickAddForm({}, tt('tk.tasksPh'), 'qa-tasks') + '</section>' +
         '<section class="toolbar" aria-label="' + esc(tt('tk.searchFilters')) + '">' +
           '<label class="search">' + icon('search') + '<span class="sr-only">' + esc(tt('tk.searchTasks')) + '</span>' +
             '<input type="search" id="task-search" data-input="task-filter" data-key="q" value="' + esc(filters.q) + '" placeholder="' + esc(tt('tk.searchPh')) + '"></label>' +
@@ -877,12 +880,12 @@ T4.tasks = (function () {
           ' · ' + esc(tt('tk.todayDone', { done: done.length, total: all.length })) + (estimate ? ' · ' + esc(tt('tk.todayRemaining', { time: U.fmtMinutes(estimate) })) : ''),
           '<a class="btn" href="#/plan">' + icon('book') + esc(tt('tk.dailyPlan')) + '</a>' + newTaskBtn(today)) +
         (all.length ? '<div class="mb">' + ui.progressBar(pct, tt('tk.todayProgress')) + '</div>' : '') +
-        '<section class="card">' + quickAddForm({ dueDate: today, priority: 'medium' }, tt('tk.todayPh'), 'qa-today') + '</section>' +
+        '<section class="capture">' + quickAddForm({ dueDate: today, priority: 'medium' }, tt('tk.todayPh'), 'qa-today') + '</section>' +
         (overdue.length ? '<section class="section"><div class="section__head"><h2 class="section__title text-danger">' + icon('alert') + esc(tt('tk.overdue')) + ' <span class="count">' + overdue.length + '</span></h2>' +
           '<button type="button" class="btn btn--sm" data-action="reschedule-overdue">' + esc(tt('tk.moveAllToday')) + '</button></div>' + list(overdue) + '</section>' : '') +
-        '<section class="section"><div class="section__head"><h2 class="section__title">' + icon('sun') + esc(tt('tk.today')) + ' <span class="count">' + open.length + '</span></h2></div>' +
+        '<section class="section"><div class="section__head"><h2 class="section__title">' + esc(tt('tk.today')) + ' <span class="count">' + open.length + '</span></h2></div>' +
           list(open, { hideDate: true }, ui.emptyState('sun', tt(all.length ? 'tk.allDoneToday' : 'tk.nothingToday'), tt(all.length ? 'tk.allDoneText' : 'tk.nothingTodayText'))) + '</section>' +
-        (done.length ? '<details class="section done-section"><summary class="section__title">' + icon('check') + esc(tt('tk.completedHeading')) + ' <span class="count">' + done.length + '</span></summary>' + list(done, { hideDate: true }) + '</details>' : '');
+        (done.length ? '<details class="section done-section"><summary class="section__title">' + esc(tt('tk.completedHeading')) + ' <span class="count">' + done.length + '</span></summary>' + list(done, { hideDate: true }) + '</details>' : '');
     },
   };
 
@@ -913,7 +916,7 @@ T4.tasks = (function () {
         html += '<section class="section"><div class="section__head"><h2 class="section__title">' + esc(tt('tk.later')) + ' <span class="count">' + groups.later.length + '</span></h2></div>' + list(groups.later) + '</section>';
       }
       return pageHeader(tt('nav.upcoming'), esc(tt('tk.upcomingSub')), newTaskBtn(U.addDays(today, 1))) +
-        '<section class="card">' + quickAddForm({ dueDate: U.addDays(today, 1), priority: 'medium' }, tt('tk.upcomingPh'), 'qa-upcoming') + '</section>' +
+        '<section class="capture">' + quickAddForm({ dueDate: U.addDays(today, 1), priority: 'medium' }, tt('tk.upcomingPh'), 'qa-upcoming') + '</section>' +
         (html || ui.emptyState('upcoming', tt('tk.nothingUpcoming'), tt('tk.nothingUpcomingText')));
     },
   };
